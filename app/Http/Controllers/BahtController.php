@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BahtResource;
 use App\Models\Baht;
 use App\Models\Consumer;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class BahtController extends Controller
         //
 
         return inertia('Bahts/Index', [
-            'bahts' => Baht::latest()->latest('id')->paginate(20)
+            'bahts' => BahtResource::collection(Baht::latest()->latest('id')->paginate(20))
         ]);
     }
 
