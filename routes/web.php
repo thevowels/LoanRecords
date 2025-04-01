@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BahtController;
 use App\Models\Consumer;
 
 use App\Http\Resources\ConsumerResource;
@@ -35,7 +36,8 @@ Route::middleware([
     Route::post('/people', [ConsumerController::class, 'store'])->name('people.store');
     Route::delete('/people/{consumer}', [ConsumerController::class, 'destroy'])->name('people.destroy');
 
-
+    Route::resource('consumers.bahts', BahtController::class)->shallow()->only(['store']);
+    Route::get('/bahts', [BahtController::class, 'index'])->name('bahts.index');
 
 });
 

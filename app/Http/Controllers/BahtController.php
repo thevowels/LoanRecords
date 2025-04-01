@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Baht;
+use App\Models\Consumer;
 use Illuminate\Http\Request;
 
 class BahtController extends Controller
@@ -13,6 +14,10 @@ class BahtController extends Controller
     public function index()
     {
         //
+
+        return inertia('Bahts/Index', [
+            'bahts' => Baht::latest()->latest('id')->paginate(20)
+        ]);
     }
 
     /**
@@ -26,9 +31,21 @@ class BahtController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store( Request $request, Consumer $consumer)
     {
         //
+        $valided = $request->validate([
+            'amount' => ['required', 'integer', 'gte:10'],
+            'is_loan' => ['required', 'boolean'],
+        ]);
+
+        $baht = Baht::create([
+            ...$valided,
+            'consumer_id' => $consumer->id,
+        ]);
+
+        return redirect(route('people.show', $consumer))
+                    ->banner('Loan Record created successfully!');
     }
 
     /**

@@ -16,7 +16,6 @@ return new class extends Migration
     {
         Schema::create('bahts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
             $table->foreignIdFor(Consumer::class)->constrained()->restrictOnDelete();
             $table->boolean('is_loan')->default(true);
             $table->unsignedBigInteger('amount');

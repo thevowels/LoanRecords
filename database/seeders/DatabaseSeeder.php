@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
 
         $testUserConsumers =  Consumer::factory(30)->for($testUser)->create();
 
-        Baht::factory(30)->recycle($consumers)->recycle($users)->create();
+        Baht::factory(100)->recycle($consumers)->create();
+        Baht::factory(100)->recycle($testUserConsumers)->create();
 
 
 
