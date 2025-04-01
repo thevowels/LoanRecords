@@ -6,6 +6,7 @@ use App\Http\Resources\ConsumerResource;
 use App\Models\Consumer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
 class ConsumerController extends Controller
@@ -89,8 +90,12 @@ class ConsumerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Consumer $consumer)
+    public function destroy(Request $request,Consumer $consumer)
     {
-        //
+        Gate::authorize('delete', [Consumer::class, $consumer]);
+
+        $consumer->delete();
+        return redirect(route('people.index'))
+            ->banner('consumer archived successfully');
     }
 }

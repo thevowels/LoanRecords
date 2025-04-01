@@ -33,6 +33,7 @@ Route::middleware([
     Route::get('/people/{consumer}', [ConsumerController::class, 'show'])->name('people.show')->where('consumer', '[0-9]+');
     Route::get('/people/create', [ConsumerController::class, 'create'])->name('people.create');
     Route::post('/people', [ConsumerController::class, 'store'])->name('people.store');
+    Route::delete('/people/{consumer}', [ConsumerController::class, 'destroy'])->name('people.destroy');
 
 
 

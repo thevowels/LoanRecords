@@ -19,9 +19,14 @@
                         </p>
                         <p>{{consumer.country}}</p>
                         <p>{{consumer.city}}</p>
-                        <div class="py-4 border border-indigo-600 rounded-lg text-center font-bold text-lg">
+                        <div class="py-3 border border-indigo-600 rounded-lg text-center font-bold text-lg">
                             Outstanding Amount
                             <div>{{consumer.amount}}</div>
+                        </div>
+                        <div class="py-4">
+                            <Link :href="route('people.destroy', consumer)" method="delete" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">
+                                Archive
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -35,7 +40,10 @@
 </template>
 <script setup >
 
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+
 const props = defineProps(['consumer'])
+import {Link} from "@inertiajs/vue3";
 import Container from "@/Components/Container.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 </script>
