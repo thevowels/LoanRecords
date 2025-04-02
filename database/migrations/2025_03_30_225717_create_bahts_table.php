@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Consumer::class)->constrained()->restrictOnDelete();
             $table->boolean('is_loan')->default(true);
             $table->unsignedBigInteger('amount');
-            $table->string('comment')->nullable();
+            $table->string('comment')->nullable()->default('-');
             $table->timestamps();
         });
     }

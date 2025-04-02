@@ -38,7 +38,7 @@ class BahtController extends Controller
         //
         $valiated = $request->validate([
             'amount' => ['required', 'integer', function ($attribute, $value, $fail) use ($consumer, $request) {
-                if($request->is_loan === false &&  $consumer && $value >= $consumer->amount){
+                if($request->is_loan === false &&  $consumer && $value > $consumer->amount){
                     $fail('The record amount must be less than the consumer\'s current amount.');
                 }
             }],
