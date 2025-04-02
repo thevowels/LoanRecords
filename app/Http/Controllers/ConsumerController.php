@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BahtResource;
 use App\Http\Resources\ConsumerResource;
+use App\Models\Baht;
 use App\Models\Consumer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -68,6 +70,7 @@ class ConsumerController extends Controller
     {
         return inertia('People/Show', [
             'consumer' => ConsumerResource::make($consumer),
+            'bahts' => BahtResource::collection(Baht::with('consumer')->where('consumer_id', '=', $consumer->id)->paginate()),
         ]);
     }
 

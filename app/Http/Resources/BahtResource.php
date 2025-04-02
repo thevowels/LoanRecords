@@ -19,6 +19,7 @@ class BahtResource extends JsonResource
             'consumer' => ConsumerResource::make($this->whenLoaded('consumer')),
             'is_loan' => $this->is_loan,
             'amount' => $this->amount,
+            'comment' => $this->comment,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

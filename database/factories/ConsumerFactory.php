@@ -44,7 +44,8 @@ class ConsumerFactory extends Factory
             'country' => fake()->country(),
             'city' => fake()->city(),
 
-            'amount' => 0,
+            'amount' => fake()->randomDigit(),
+
 
         ];
     }

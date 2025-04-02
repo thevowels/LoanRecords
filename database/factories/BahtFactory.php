@@ -28,8 +28,10 @@ class BahtFactory extends Factory
     {
         return [
             'consumer_id' => Consumer::factory(),
-            'is_loan' => true,
+            'is_loan' => fake()->boolean,
             'amount' => fake()->randomNumber(5, true),
+            'comment' => fake()->realText(20)
+
         ];
     }
 }

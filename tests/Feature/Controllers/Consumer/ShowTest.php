@@ -29,5 +29,5 @@ it('returns correct Consumer', function(){
         ->get(route('people.show', $consumer))
         ->assertHasResource('consumer',  ConsumerResource::make($consumer));
 
-
 });
+
