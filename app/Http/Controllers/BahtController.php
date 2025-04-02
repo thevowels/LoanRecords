@@ -36,26 +36,26 @@ class BahtController extends Controller
     public function store( Request $request, Consumer $consumer)
     {
         //
-        $valiated = $request->validate([
-            'amount' => ['required', 'integer', function ($attribute, $value, $fail) use ($consumer, $request) {
-                if($request->is_loan === false &&  $consumer && $value > $consumer->amount){
+//        dd($request);
+        $validated = $request->validate([
+            'amount' => ['required', 'integer', 'numeric', function ($attribute, $value, $fail) use ($consumer, $request) {
+                if( $request->is_loan === false &&  $consumer && $value > $consumer->amount){
                     $fail('The record amount must be less than the consumer\'s current amount.');
                 }
             }],
             'is_loan' => ['required', 'boolean'],
             'comment' => ['nullable', 'string'],
         ]);
+
         Gate::authorize('create', [Baht::class, $consumer]);
-
-
         $baht = Baht::create([
-            ...$valiated,
+            ...$validated,
             'consumer_id' => $consumer->id,
         ]);
-        if($valiated['is_loan']) {
-            $consumer->increment('amount', $valiated['amount']);
+        if($validated['is_loan']) {
+            $consumer->increment('amount', (integer) $validated['amount']);
         }else{
-            $consumer->decrement('amount', $valiated['amount']);
+            $consumer->decrement('amount', (integer) $validated['amount']);
         }
 
         return redirect(route('people.show', $consumer))

@@ -61,7 +61,7 @@ it('accept only valid data', function (array $badDAta, array|string $errors) {
             ...$this->validData, ...$badDAta,
         ])->assertInvalid($errors);
 })->with([
-//    [['amount' => null], 'amount'],
+    [['amount' => null], 'amount'],
     [['amount' => true], 'amount'],
 //    [['amount' => -1000], 'amount'],
 //    [['amount' => 'abc'], 'amount'],
@@ -77,6 +77,6 @@ it('accept only valid data', function (array $badDAta, array|string $errors) {
 //    [['comment'=>42], 'comment'],
 //    [['comment' => 1.5], 'comment'],
 //    [['comment' => true], 'comment'],
-
+//
 
 ]);
