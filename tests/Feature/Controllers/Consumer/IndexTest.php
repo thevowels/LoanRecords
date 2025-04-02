@@ -21,11 +21,13 @@ it('returns correct component', function () {
 
 
 it('passes consumers to the view', function () {
-    $people = Consumer::factory(5)->create();
+    $user = User::factory()->create();
+    Consumer::factory(10)->create();
+    $people = Consumer::factory(5)->recycle($user)->create();
 
     $people->load('user');
 
-    actingAs(User::factory()->create())
+    actingAs($user)
         ->get(route('people.index'))
         ->assertHasPaginatedResource('people', ConsumerResource::collection($people->reverse()));
 });
