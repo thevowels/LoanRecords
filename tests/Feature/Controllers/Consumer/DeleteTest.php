@@ -23,7 +23,7 @@ it('user can delete only consumers which he created', function (): void {
 
 it('consumer can be soft deleted', function (): void {
     $user = User::factory()->create();
-    $consumer = Consumer::factory()->for($user)->create();
+    $consumer = Consumer::factory()->for($user)->create(['amount' => 0]);
 
 
     actingAs($user)
