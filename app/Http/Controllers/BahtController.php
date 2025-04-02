@@ -38,6 +38,7 @@ class BahtController extends Controller
         $valided = $request->validate([
             'amount' => ['required', 'integer', 'gte:10'],
             'is_loan' => ['required', 'boolean'],
+            'comment' => ['nullable', 'string'],
         ]);
 
         $baht = Baht::create([

@@ -73,5 +73,9 @@ it('accept only valid data', function (array $badDAta, array|string $errors) {
     [['is_loan' => 42], 'is_loan'],
     [['is_loan' => 1.5], 'is_loan'],
 
+    [['comment'=>42], 'comment'],
+    [['comment' => 1.5], 'comment'],
+    [['comment' => true], 'comment'],
+
 
 ]);

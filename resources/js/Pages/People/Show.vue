@@ -30,7 +30,7 @@
                                                                 <option :value="true">
                                                                     Loan
                                                                 </option>
-                                                                <option :value="true">
+                                                                <option :value="false">
                                                                     Return
                                                                 </option>
                                                             </select>
@@ -46,8 +46,8 @@
                                         </div>
                                     </div>
                                     <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                        <button type="button" class="inline-flex w-full justify-center rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto" @click="open = false">Add Record</button>
-                                        <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" @click="submitRecord" ref="cancelButtonRef">Cancel</button>
+                                        <button type="button" class="inline-flex w-full justify-center rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto" @click="submitRecord">Add Record</button>
+                                        <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" @click="open = false" ref="cancelButtonRef">Cancel</button>
                                     </div>
                                 </DialogPanel>
                             </TransitionChild>
@@ -140,12 +140,22 @@ import InputError from "@/Components/InputError.vue";
 
 
 const form = useForm({
-    'amount': 0,
+    'amount': '0',
     'is_loan': true,
     'comment': '',
 })
 const submitRecord = () => {
-    console.log('submitRecord', form.data)
+    form.post(route('consumers.bahts.store', props.consumer.id),{
+        preserveScroll: false,
+        onSuccess: () => {
+            form.reset();
+            open.value=false;
+            }
+    });
+
+    console.log('submitted data', form.data());
+
+
 }
 
 const open = ref(false)
