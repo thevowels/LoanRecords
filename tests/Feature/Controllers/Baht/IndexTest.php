@@ -2,6 +2,7 @@
 
 use App\Models\User;
 
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
 it('requires authentication' ,function (){
@@ -13,6 +14,7 @@ it('requires authentication' ,function (){
 it('return correct component', function () {
     $user = User::factory()->create();
 
-    get(route('bahts.index'))
+    actingAs($user)
+        ->get(route('bahts.index'))
         ->assertComponent('Bahts/Index');
 });

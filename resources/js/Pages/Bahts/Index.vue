@@ -11,4 +11,6 @@
 
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Container from "@/Components/Container.vue";
+
+const props = defineProps(['bahts']);
 </script>
