@@ -59,7 +59,7 @@
             <div class="container">
                 <div class="grid grid-cols-1 sm:grid-cols-2 ">
                     <div class="mx-auto">
-                        <img src="https://dummyjson.com/icon/abc123/512" class="w-32 sm:w-fit" />
+                        <img src="https://dummyjson.com/icon/abc123/512" class="w-16 sm:w-fit" />
                     </div>
                     <div class="space-y-2 ">
                         <h1 class="text-left text-xl font-bold pl-4">{{ consumer.name }}</h1>
@@ -80,7 +80,10 @@
                                 Archive
                             </Link>
 
-                            <PrimaryButton @click="switchShow">Add Record</PrimaryButton>
+                            <div v-if="bahts.data.length !== 0 " class="text-center max-w-sm mx-auto mt-12">
+                                <PrimaryButton @click="switchShow">Add Record</PrimaryButton>
+
+                            </div>
 
 
                         </div>
@@ -90,9 +93,9 @@
                 <div class="mt-4">
                     <div class="text-center font-serif text-lg font-semibold text-gray-800">
                         Loan / Return
-
                     </div>
-                    <table v-if="bahts.data.length > 0" class="table table-auto border-collapse border border-gray-400 mx-auto">
+
+                    <table v-if="bahts.data.length > 0" class=" mt-4 table table-auto border-collapse border border-gray-400 mx-auto">
                         <thead>
                             <tr>
 
@@ -107,12 +110,14 @@
                             <td class="border border-gray-300 px-4 text-sm">{{baht.comment}}</td>
                         </tr>
                     </table>
+                    <Pagination :meta="bahts.meta" class="max-w-xl  mx-auto text-xs"></Pagination>
+
                     <div v-if="bahts.data.length === 0 " class="text-center max-w-sm mx-auto mt-12">
                         <div>
                             Add new Loan / Return Records by clicking Add New Record Button
 
                         </div>
-                        <PrimaryButton @click="switchShow">Toggle</PrimaryButton>
+                        <PrimaryButton @click="switchShow">Add Record</PrimaryButton>
 
                     </div>
                 </div>
@@ -137,12 +142,13 @@ import {ExclamationTriangleIcon} from "@heroicons/vue/24/outline/index.js";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 
 const form = useForm({
     'amount': '0',
     'is_loan': true,
-    'comment': '',
+    'comment': '-',
 })
 const submitRecord = () => {
     form.post(route('consumers.bahts.store', props.consumer.id),{

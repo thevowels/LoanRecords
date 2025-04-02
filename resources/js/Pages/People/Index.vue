@@ -35,8 +35,9 @@
                         </div>
                     </div>
                 </div>
-                <Pagination :meta="props.people.meta"></Pagination>
-
+                <div v-if="people.meta.last_page !== 1">
+                    <Pagination :meta="props.people.meta"></Pagination>
+                </div>
             </div>
         </Container>
     </AppLayout>
