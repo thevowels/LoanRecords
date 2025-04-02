@@ -70,7 +70,7 @@ class ConsumerController extends Controller
     {
         return inertia('People/Show', [
             'consumer' => ConsumerResource::make($consumer),
-            'bahts' => BahtResource::collection(Baht::with('consumer')->where('consumer_id', '=', $consumer->id)->paginate()),
+            'bahts' => BahtResource::collection(Baht::with('consumer')->where('consumer_id', '=', $consumer->id)->latest()->latest('id')->paginate()),
         ]);
     }
 

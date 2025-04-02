@@ -35,8 +35,6 @@ class BahtController extends Controller
      */
     public function store( Request $request, Consumer $consumer)
     {
-        //
-//        dd($request);
         $validated = $request->validate([
             'amount' => ['required', 'integer', 'numeric', 'gt:0', function ($attribute, $value, $fail) use ($consumer, $request) {
                 if( $request->is_loan === false &&  $consumer && $value > $consumer->amount){
