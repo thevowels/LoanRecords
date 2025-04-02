@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Baht;
+use App\Models\Consumer;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -27,9 +28,12 @@ class BahtPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, Consumer $consumer): bool
     {
-        return false;
+        if( ! ($consumer->user_id === $user->id || $user->is_admin)) {
+            return false;
+        }
+        return true;
     }
 
     /**
