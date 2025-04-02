@@ -11,8 +11,8 @@ use function Pest\Laravel\post;
 
 beforeEach(function () {
     $this->validData =  [
-        'amount'=>30000,
-        'is_loan'=>true,
+        'amount'=>10000,
+        'is_loan'=>false,
         'comment' => '-'
     ];
 });
@@ -54,7 +54,9 @@ it('redirect to the consumer page', function () {
 
 it('accept only valid data', function (array $badDAta, array|string $errors) {
     $user = User::factory()->create();
-    $consumer = Consumer::factory()->recycle($user)->create();
+    $consumer = Consumer::factory()->recycle($user)->create([
+        'amount' => 50000
+    ]);
 
     actingAs($user)
         ->post(route('consumers.bahts.store', $consumer), [
@@ -63,20 +65,24 @@ it('accept only valid data', function (array $badDAta, array|string $errors) {
 })->with([
     [['amount' => null], 'amount'],
     [['amount' => true], 'amount'],
-//    [['amount' => -1000], 'amount'],
-//    [['amount' => 'abc'], 'amount'],
-//    [['amount' => 1000.5], 'amount'],
-//    [['amount' => 1.5], 'amount'],
-//    [['amount' => 9], 'amount'],
-//
-//    [['is_loan' => null], 'is_loan'],
-//    [['is_loan' => 'abc'], 'is_loan'],
-//    [['is_loan' => 42], 'is_loan'],
-//    [['is_loan' => 1.5], 'is_loan'],
-//
-//    [['comment'=>42], 'comment'],
-//    [['comment' => 1.5], 'comment'],
-//    [['comment' => true], 'comment'],
-//
+    [['amount' => -1000], 'amount'],
+    [['amount' => 'abc'], 'amount'],
+    [['amount' => 1000.5], 'amount'],
+    [['amount' => 1.5], 'amount'],
+    [['amount' => 0], 'amount'],
+
+    [['amount' => 60000], 'amount'],
+    [['amount' => 100000], 'amount'],
+
+
+    [['is_loan' => null], 'is_loan'],
+    [['is_loan' => 'abc'], 'is_loan'],
+    [['is_loan' => 42], 'is_loan'],
+    [['is_loan' => 1.5], 'is_loan'],
+
+    [['comment'=>42], 'comment'],
+    [['comment' => 1.5], 'comment'],
+    [['comment' => true], 'comment'],
+
 
 ]);
