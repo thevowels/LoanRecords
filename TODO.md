@@ -295,8 +295,7 @@
   - [ ] User-friendly messages
     *Description: Provide clear error messages to users*
 - [ ] Add code style enforcement
-  - [ ] PHP CS Fixer configuration
-    *Description: Configure PHP code style rules*
+  - [ ] Laravel Pint
   - [ ] ESLint rules
     *Description: Define JavaScript/TypeScript style rules*
   - [ ] Pre-commit hooks
@@ -323,7 +322,7 @@
     *Description: Generate test data efficiently*
   - [ ] Test assertions
     *Description: Define clear test assertions*
-- [ ] Implement integration tests
+- [ ] Implement integration tests(Laravel Dusk)
   - [ ] API endpoint testing
     *Description: Test API endpoints comprehensively*
   - [ ] Database integration
@@ -332,14 +331,14 @@
     *Description: Mock external service dependencies*
   - [ ] Test environment setup
     *Description: Configure test environments*
-- [ ] Add end-to-end testing
+- [ ] Add end-to-end testing (Laravel Dusk)
   - [ ] User flow testing
     *Description: Test complete user workflows*
   - [ ] Cross-browser testing
     *Description: Test across different browsers*
   - [ ] Performance testing
     *Description: Test system performance under load*
-- [ ] Implement performance testing
+- [ ] Implement performance testing (Locust)
   - [ ] Load testing
     *Description: Test system under various loads*
   - [ ] Stress testing
@@ -474,7 +473,7 @@
 5. Integration & Extensibility
    - API endpoints
      *Description: Enables system integration*
-   - Third-party integrations
+   - Enable Third-party integrations
      *Description: Extends system capabilities*
    - Multi-currency support
      *Description: Expands business reach*
@@ -484,7 +483,7 @@
 ## Additional Considerations
 
 ### 1. Scalability
-- [ ] Horizontal scaling support
+- [ ] Horizontal scaling support (Kubernetes Ready)
   *Description: Ability to add more servers to handle increased load*
 - [ ] Database sharding strategy
   *Description: Distribute database load across multiple servers*
@@ -496,26 +495,16 @@
   *Description: Track and optimize resource usage*
 
 ### 2. Internationalization
-- [ ] Multi-language support
+- [ ] Multi-language support ( Burmese, English )
   *Description: Support for multiple languages in the interface*
-- [ ] Localization of dates and numbers
+- [ ] Localization of dates and numbers ( Burmese, English )
   *Description: Format dates and numbers according to locale*
-- [ ] RTL language support
-  *Description: Support for right-to-left languages*
-- [ ] Cultural considerations
-  *Description: Adapt to cultural differences in financial practices*
 - [ ] Timezone handling
   *Description: Proper handling of different timezones*
 
 ### 3. Accessibility
 - [ ] WCAG compliance
   *Description: Meet web accessibility standards*
-- [ ] Screen reader support
-  *Description: Ensure compatibility with screen readers*
-- [ ] Keyboard navigation
-  *Description: Enable full keyboard accessibility*
-- [ ] Color contrast
-  *Description: Ensure sufficient color contrast for readability*
 - [ ] Responsive design
   *Description: Optimize for different screen sizes*
 
@@ -550,7 +539,6 @@
   - [ ] LoanDTO
     *Description: Standardize loan data structure and validation*
     - Properties: id, amount, interest_rate, term, status, borrower_id
-    - Validation rules for each property
     - Type casting and data transformation
   - [ ] PaymentDTO
     *Description: Handle payment data consistently*
@@ -560,7 +548,6 @@
   - [ ] BorrowerDTO
     *Description: Manage borrower information*
     - Properties: id, name, contact_info, documents, credit_score
-    - Personal data validation
     - Document verification status
 
 - [ ] Implement DTO Factories
@@ -600,7 +587,6 @@
   - [ ] NotificationService
     *Description: Handle all system notifications*
     - Email notifications
-    - In-app notifications
     - Payment reminders
     - Status updates
   - [ ] ReportService
