@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-4" v-if="bahts.data.length !== 0 ">
                     <div class="text-center font-serif text-lg font-semibold text-gray-800">
                         Loan / Return
                     </div>
