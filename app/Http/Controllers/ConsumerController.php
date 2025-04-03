@@ -7,6 +7,7 @@ use App\Http\Resources\ConsumerResource;
 use App\Models\Baht;
 use App\Models\Consumer;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
@@ -19,8 +20,19 @@ class ConsumerController extends Controller
     public function index(Request $request)
     {
 
+        $sortValue = $request->query('sort') ? $request->query('sort'):  'id';
+
+        $people = Consumer::with('user')
+            ->where('user_id', '=', $request->user()->id)
+            ->when($request->query('query'),
+                       fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
+            )
+            ->latest()
+            ->latest($sortValue);
+
         return inertia('People/Index',[
-            'people'=> ConsumerResource::collection(Consumer::with('user')->where('user_id', '=', $request->user()->id )->latest()->latest('id')->paginate()),
+            'people'=> ConsumerResource::collection($people->paginate()),
+            'query' => $request->query('query'),
         ]);
     }
 
