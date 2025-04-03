@@ -43,6 +43,6 @@ it('retuns related records to the view', function(){
     $bahts->load('consumer');
     actingAs($user)
         ->get(route('people.show', $consumer))
-        ->assertHasPaginatedResource('bahts', BahtResource::collection($bahts));
+        ->assertHasPaginatedResource('bahts', BahtResource::collection($bahts->reverse()));
 });
 
