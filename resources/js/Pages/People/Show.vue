@@ -1,5 +1,5 @@
 <template>
-    <AppLayout>
+    <AppLayout :title="consumer.name">
         <Container>
             <TransitionRoot as="template" :show="open">
                 <Dialog class="relative z-10" @close="open = false">

@@ -1,6 +1,6 @@
 <template>
 
-    <AppLayout>
+    <AppLayout title="People">
         <Container >
             <div v-if="people.data.length === 0" class="flex pt-40 items-center justify-center text-center space-y-8 flex-col">
                 <div class="text-xl font-semibold ">
