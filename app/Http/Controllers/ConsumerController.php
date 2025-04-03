@@ -28,11 +28,12 @@ class ConsumerController extends Controller
                        fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
             )
             ->latest()
-            ->latest($sortValue);
+            ->orderBy($sortValue, 'desc');
 
         return inertia('People/Index',[
             'people'=> ConsumerResource::collection($people->paginate()),
             'query' => $request->query('query'),
+            'sort' => $request->query('sort'),
         ]);
     }
 

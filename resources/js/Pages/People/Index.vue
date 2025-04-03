@@ -16,18 +16,18 @@
                 </div>
             </div>
             <div v-if="people.data.length !== 0">
-                <div class="text-right mb-4 mr-2 flex  justify-between">
+                <div class="text-right mb-4 mr-2 flex  flex-col sm:flex-row justify-between text-center">
                     <div>
                         <a :href="route('people.create')" class="inline-flex items-center px-4 py-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">Add New Person</a>
                     </div>
                     <div>
                         <div v-if="!filter">
-                            <PrimaryButton @click=" () => filter=true" >Filter</PrimaryButton>
+                            <PrimaryButton @click=" () => filter=true" class="px-4 py-4">Filter</PrimaryButton>
                         </div>
                         <form @submit.prevent="search" class="m-3" v-if="filter">
                             <div>
                                 <div class="space-x-2 flex mt-1 ">
-                                    <select v-model="searchForm.sort" @select="search">
+                                    <select v-model="searchForm.sort"  @change="search">
                                         <option value="id">Latest</option>
                                         <option value="name">Name</option>
                                         <option value="amount">Amount</option>
@@ -79,7 +79,7 @@ import DangerButton from "@/Components/DangerButton.vue";
 import {useForm, usePage} from "@inertiajs/vue3";
 import {ref} from "vue";
 
-const props = defineProps(['people', 'query']);
+const props = defineProps(['people', 'query', 'sort']);
 
 const page = usePage();
 
@@ -87,7 +87,7 @@ const filter = ref(false);
 
 const searchForm = useForm({
     query: props.query,
-    sort: 'id',
+    sort: props.sort || 'id',
     page: 1
 });
 
