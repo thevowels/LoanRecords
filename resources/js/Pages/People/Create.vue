@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <InputLabel for="identification_type" >Identification Type</InputLabel>
-                    <select id="identification_type" v-model="form.identification_type">
+                    <select id="identification_type" v-model="form.identification_type" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                         <option value="NRC">NRC</option>
                         <option value="Passport">Passport</option>
                         <option value="WorkPermit">WorkPermit</option>
@@ -33,17 +33,19 @@
                     <InputError :message="form.errors.identification_number"></InputError>
 
                 </div>
-                <div>
-                    <InputLabel for="country" >Country</InputLabel>
-                    <select id="country" v-model="form.country">
-                        <option value="Thailand">Thailand</option>
-                        <option value="Myanmar">Myanmar</option>
-                    </select>
-                    <InputError :message="form.errors.country"></InputError>
-                </div>
+<!--                <div>-->
+<!--                    <InputLabel for="country" >Country</InputLabel>-->
+<!--                    <select id="country" v-model="form.country" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">-->
+<!--                        <option value="Thailand">Thailand</option>-->
+<!--                        <option value="Myanmar">Myanmar</option>-->
+<!--                    </select>-->
+<!--                    <InputError :message="form.errors.country"></InputError>-->
+<!--                </div>-->
                 <div>
                     <InputLabel for="city" >City</InputLabel>
-                    <TextInput id="city" v-model="form.city" placeholder="City" class="w-full"> </TextInput>
+                    <select id="city" v-model="form.city" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <option v-for="city in provinces" :value="city" :key="city">{{city}}</option>
+                    </select>
                     <InputError :message="form.errors.city"></InputError>
                 </div>
                 <div class="text-right space-x-4 justify-between">
@@ -66,14 +68,31 @@ import TextInput from "@/Components/TextInput.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 
+const provinces = [
+    "Krabi", "Bangkok", "Kanchanaburi", "Kalasin", "KamphaengPhet", "KhonKaen",
+    "Chanthaburi", "Chachoengsao", "ChonBuri", "ChaiNat", "Chaiyaphum", "Chumphon",
+    "ChiangRai", "ChiangMai", "Trang", "Trat", "Tak", "NakhonNayok", "NakhonPathom",
+    "NakhonPhanom", "NakhonRatchasima", "NakhonSiThammarat", "NakhonSawan",
+    "Nonthaburi", "Narathiwat", "Nan", "BeungKan", "BuriRam", "PathumThani",
+    "PrachuapKhiriKhan", "PrachinBuri", "Pattani", "PhraNakhonSiAyutthaya", "Phayao",
+    "Phang-nga", "Phatthalung", "Phichit", "Phitsanulok", "Phetchaburi", "Phetchabun",
+    "Phrae", "Phuket", "MahaSarakham", "Mukdahan", "MaeHongSon", "Yasothon", "Yala",
+    "RoiEt", "Ranong", "Rayong", "Ratchaburi", "LopBuri", "Lampang", "Lamphun", "Loei",
+    "SiSaKet", "SakonNakhon", "Songkhla", "Satun", "SamutPrakan", "SamutSongkhram",
+    "SamutSakhon", "SaKaeo", "Saraburi", "SingBuri", "Sukhothai", "SuphanBuri",
+    "SuratThani", "Surin", "NongKhai", "NongBuaLamPhu", "AngThong", "AmnatCharoen",
+    "UdonThani", "Uttaradit", "UthaiThani", "UbonRatchathani"
+];
+
+
 const form = useForm({
     'name': '',
     'email': '',
     'phone': '',
     'identification_type': 'NRC',
     'identification_number': '',
-    'country': 'Myanmar',
-    'city': '',
+    'country': 'Thailand',
+    'city': provinces[1] ,
 });
 
 const submitConsumer =  () => {

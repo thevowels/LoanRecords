@@ -79,6 +79,8 @@ import DangerButton from "@/Components/DangerButton.vue";
 import {useForm, usePage} from "@inertiajs/vue3";
 import {ref} from "vue";
 
+
+
 const props = defineProps(['people', 'query', 'sort']);
 
 const page = usePage();
