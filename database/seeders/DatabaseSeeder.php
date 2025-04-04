@@ -16,18 +16,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        $users = User::factory(5)->create();
-//        $consumers = Consumer::factory(10)->recycle($users)->create();
+        $users = User::factory(5)->create();
+        $consumers = Consumer::factory(50)->recycle($users)->create();
 //
         $testUser = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        $adminUser = User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
             'is_admin' => true,
         ]);
-//
-//
-//        $testUserConsumers =  Consumer::factory(30)->for($testUser)->create();
-//
+
+        $testUserConsumers =  Consumer::factory(20)->for($testUser)->create();
+            $adminUserConsumers =  Consumer::factory(20)->for($adminUser)->create();
+
 //        Baht::factory(100)->recycle($consumers)->create();
 //        Baht::factory(100)->recycle($testUserConsumers)->create();
 

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\BahtController;
+use App\Http\Controllers\DashboardController;
 use App\Models\Consumer;
 
 use App\Http\Resources\ConsumerResource;
@@ -26,9 +28,9 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::get('/admin', AdminDashboardController::class)->name('admin');
 
     Route::get('/people', [ConsumerController::class, 'index'])->name('people.index');
     Route::get('/people/{consumer}', [ConsumerController::class, 'show'])->name('people.show')->where('consumer', '[0-9]+');

@@ -1,6 +1,26 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Welcome from '@/Components/Welcome.vue';
+import {usePage} from "@inertiajs/vue3";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Barchart from "@/Components/Dashboard/Barchart.vue";
+const page = usePage();
+
+const  bardata={
+    labels: ['January', 'February', 'March'],
+    datasets: [{ data: [40, 20, 12] }]
+};
+
+const options = {
+    responsive: true
+};
+
+const click = () => {
+    console.log(page.props.auth.user?.is_admin);
+}
+
+const props = defineProps(['people'])
+
 </script>
 
 <template>
@@ -8,15 +28,22 @@ import Welcome from '@/Components/Welcome.vue';
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Dashboard
+
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
-                </div>
-            </div>
-        </div>
+<!--        <div class="py-12">-->
+<!--            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">-->
+<!--                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">-->
+<!--                    Summaries-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="py-12">-->
+<!--            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">-->
+<!--                People Management-->
+<!--            </div>-->
+<!--        </div>-->
     </AppLayout>
 </template>
