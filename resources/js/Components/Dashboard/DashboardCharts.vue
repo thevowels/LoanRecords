@@ -23,6 +23,10 @@
             Return Chart
             <Linechart :data="getReturnChartData()" :title="'Return amounts Over the last 10 Days'"/>
         </div>
+        <div v-if="activeTab === 'Compare'">
+            Return Chart
+            <Linechart :data="getCompareChartData()" :title="'Return amounts Over the last 10 Days'"/>
+        </div>
 
 
     </div>
@@ -36,7 +40,7 @@ import {parse, format } from "date-fns";
 
 const props = defineProps(['series']);
 
-const tabs=['Loan', 'Return'];
+const tabs=['Loan', 'Return', 'Compare'];
 
 const activeTab = ref('Loan');
 
@@ -58,18 +62,42 @@ const getLoanChartData = () =>{
 
 const getReturnChartData = () =>{
     return{
-            labels: Object.keys(props.series.daily_return).map(x =>  format(parse(x, 'yyyy-MM-dd', new Date()), 'MMM-dd')),
-            datasets: [
-                {
-                    label: 'Total Daily Loans',
-                    data: Object.values(props.series.daily_return),
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    tension: 0.3,
-                    fill: true,
-                }
-            ]
-        }
+        labels: Object.keys(props.series.daily_return).map(x =>  format(parse(x, 'yyyy-MM-dd', new Date()), 'MMM-dd')),
+        datasets: [
+            {
+                label: 'Total Daily Returns',
+                data: Object.values(props.series.daily_return),
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                tension: 0.3,
+                fill: true,
+            },
+        ]
+    }
+}
+
+const getCompareChartData = () =>{
+    return{
+        labels: Object.keys(props.series.daily_return).map(x =>  format(parse(x, 'yyyy-MM-dd', new Date()), 'MMM-dd')),
+        datasets: [
+            {
+                label: 'Total Daily Loans',
+                data: Object.values(props.series.daily_loan),
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                tension: 0.3,
+                fill: true,
+            },
+            {
+                label: 'Total Daily Returns',
+                data: Object.values(props.series.daily_return),
+                borderColor: '#da1f18',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                tension: 0.3,
+                fill: true,
+            },
+        ]
+    }
 }
 
 

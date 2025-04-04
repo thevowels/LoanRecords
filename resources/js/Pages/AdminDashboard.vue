@@ -38,6 +38,8 @@ import DashboardCharts from "@/Components/Dashboard/DashboardCharts.vue";
 
 const props = defineProps(['people', 'bahts', 'summaries', 'series'])
 
+
+
 const kpiCards =  [
     { label: "Active Loan", value: props.summaries.active_loan },
     // { label: "Monthly Loan", value: props.summaries.monthly_loan },

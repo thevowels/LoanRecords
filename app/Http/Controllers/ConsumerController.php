@@ -20,18 +20,25 @@ class ConsumerController extends Controller
     public function index(Request $request)
     {
 
-        $sortValue = $request->query('sort') ? $request->query('sort'):  'id';
+        $sortValue = $request->query('sort') ? $request->query('sort') :  'id';
 
-        $people = Consumer::with('user')
-            ->where('user_id', '=', $request->user()->id)
-            ->when($request->query('query'),
-                       fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
-            )
-            ->latest()
-            ->orderBy($sortValue, 'desc');
+        if($request->user()->is_admin){
+            $people = Consumer::with('user')
+                ->when($request->query('query'),
+                    fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
+                )
+                ->orderBy($sortValue, 'desc');
+        }else{
+            $people = Consumer::with('user')
+                ->where('user_id', '=', $request->user()->id)
+                ->when($request->query('query'),
+                    fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
+                )
+                ->orderBy($sortValue, 'desc');
+        }
 
         return inertia('People/Index',[
-            'people'=> ConsumerResource::collection($people->paginate()),
+            'people'=> ConsumerResource::collection($people->paginate()->withQueryString()),
             'query' => $request->query('query'),
             'sort' => $request->query('sort'),
         ]);
