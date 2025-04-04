@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BahtResource;
 use App\Http\Resources\ConsumerResource;
+use App\Models\Baht;
 use App\Models\Consumer;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,9 @@ class AdminDashboardController extends Controller
         //
         if($request->user()->is_admin){
             return inertia("AdminDashboard", [
-                'peoples' => ConsumerResource::collection(Consumer::all()),
+                'peoples' => ConsumerResource::collection(Consumer::paginate()),
+                'bahts' => BahtResource::collection(Baht::paginate()),
+                'active_loan' => Consumer::all()->sum('amount'),
             ]);
         }
         return redirect('/dashboard');

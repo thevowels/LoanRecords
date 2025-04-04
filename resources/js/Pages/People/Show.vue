@@ -111,16 +111,16 @@
                         </tr>
                     </table>
                     <Pagination :meta="bahts.meta" class="max-w-xl  mx-auto text-xs"></Pagination>
-
-                    <div v-if="bahts.data.length === 0 " class="text-center max-w-sm mx-auto mt-12">
-                        <div>
-                            Add new Loan / Return Records by clicking Add New Record Button
-
-                        </div>
-                        <PrimaryButton @click="switchShow">Add Record</PrimaryButton>
+                </div>
+                <div v-if="bahts.data.length === 0 " class="text-center max-w-sm mx-auto mt-12">
+                    <div>
+                        Add new Loan / Return Records by clicking Add New Record Button
 
                     </div>
+                    <PrimaryButton @click="switchShow">Add Record</PrimaryButton>
+
                 </div>
+
             </div>
         </Container>
     </AppLayout>
