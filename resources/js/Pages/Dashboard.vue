@@ -4,7 +4,13 @@ import {usePage} from "@inertiajs/vue3";
 const page = usePage();
 
 
-const props = defineProps(['people'])
+const props = defineProps(['people', 'summaries', 'series'])
+
+const kpiCards =  [
+    { label: "Consumer Count" , value: props.summaries.total_people, suffix:'',  click_route:'/people'},
+    { label: "Active Loan", value: props.summaries.active_loan , suffix: 'THB', click_route: false},
+]
+
 
 </script>
 
@@ -18,16 +24,22 @@ const props = defineProps(['people'])
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    Under development
+                <div class="p-6 bg-gray-50 ">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                        <a
+                            v-for="(item, index) in kpiCards"
+                            :key="index"
+                            :href="item.click_route ? item.click_route: '#'"
+                            class="bg-white p-4 rounded-2xl shadow-md flex flex-col gap-2 hover:shadow-lg transition"
+                        >
+                            <h2 class="text-xl text-gray-900 font-bold">{{ item.label }}</h2>
+                            <p class="text-2xl font-extrabold  text-right"><span class="text-green-500">{{ item.value }} </span>
+                                {{ item.suffix }}</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-<!--        <div class="py-12">-->
-<!--            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">-->
-<!--                People Management-->
-<!--            </div>-->
-<!--        </div>-->
     </AppLayout>
 </template>
