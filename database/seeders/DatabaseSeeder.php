@@ -6,7 +6,6 @@ use App\Models\Consumer;
 use App\Models\User;
 use App\Models\Baht;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Carbon;
@@ -56,7 +55,6 @@ class DatabaseSeeder extends Seeder
                     'created_at' => $start->copy(),
                     'updated_at' => $start->copy(),
                 ]);
-
             $start->addDay();
         }
 

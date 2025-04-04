@@ -4,7 +4,7 @@
 
 ### 1. Enhanced User Experience
 - [ ] Add data visualization dashboard for loan statistics
-  - [ ] Monthly loan distribution charts
+  - [x] Daily loan distribution charts
     *Description: Visual representation of loan distribution across months to identify trends and patterns*
   - [ ] Payment trend analysis
     *Description: Analyze payment patterns to predict future payment behaviors and identify potential risks*
@@ -15,7 +15,7 @@
 - [ ] Implement loan payment reminders and notifications
   - [ ] Email notifications
     *Description: Automated email alerts for upcoming payments, overdue loans, and important updates*
-  - [ ] Browser notifications
+  - [x] Browser notifications
     *Description: Real-time browser-based notifications for immediate user attention*
   - [ ] In-app notifications
     *Description: System notifications within the application for important updates and alerts*
