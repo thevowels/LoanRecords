@@ -18,14 +18,17 @@
         </div>
         <div v-if="activeTab === 'Loan'">
             <Linechart :data="getLoanChartData()" :title="'Loan Amounts Over the Last 10 Days'"/>
+            <Barchart :data="getLoanChartData()"/>
         </div>
         <div v-if="activeTab === 'Return'">
             Return Chart
             <Linechart :data="getReturnChartData()" :title="'Return amounts Over the last 10 Days'"/>
+            <Barchart :data="getReturnChartData()"/>
         </div>
         <div v-if="activeTab === 'Compare'">
             Return Chart
             <Linechart :data="getCompareChartData()" :title="'Return amounts Over the last 10 Days'"/>
+            <Barchart :data="getCompareChartData()"/>
         </div>
 
 
@@ -37,6 +40,7 @@
 import Linechart from "@/Components/Dashboard/Linechart.vue";
 import {ref} from "vue";
 import {parse, format } from "date-fns";
+import Barchart from "@/Components/Dashboard/Barchart.vue";
 
 const props = defineProps(['series']);
 
@@ -52,7 +56,7 @@ const getLoanChartData = () =>{
                 label: 'Total Daily Loans',
                 data: Object.values(props.series.daily_loan),
                 borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
                 tension: 0.3,
                 fill: true,
             }
@@ -84,7 +88,7 @@ const getCompareChartData = () =>{
                 label: 'Total Daily Loans',
                 data: Object.values(props.series.daily_loan),
                 borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                backgroundColor: 'rgba(59, 130, 246, 0.3)',
                 tension: 0.3,
                 fill: true,
             },
@@ -92,7 +96,7 @@ const getCompareChartData = () =>{
                 label: 'Total Daily Returns',
                 data: Object.values(props.series.daily_return),
                 borderColor: '#da1f18',
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                backgroundColor: '#da1f1840',
                 tension: 0.3,
                 fill: true,
             },
