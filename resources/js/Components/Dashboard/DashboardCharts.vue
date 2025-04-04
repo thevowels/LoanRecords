@@ -1,0 +1,76 @@
+<template>
+    <div>
+        Dashboard charts component
+        <div class="flex space-x-4 border-b mb-4 justify-center">
+            <button
+                v-for="tab in tabs"
+                :key="tab"
+                @click="activeTab = tab"
+                :class="[
+                      'px-4 py-2 font-medium',
+                      activeTab === tab
+                        ? 'border-b-2 border-blue-500 text-blue-600'
+                        : 'text-gray-500 hover:text-gray-700',
+                    ]"
+            >
+                {{ tab }}
+            </button>
+        </div>
+        <div v-if="activeTab === 'Loan'">
+            <Linechart :data="getLoanChartData()" :title="'Loan Amounts Over the Last 10 Days'"/>
+        </div>
+        <div v-if="activeTab === 'Return'">
+            Return Chart
+            <Linechart :data="getReturnChartData()" :title="'Return amounts Over the last 10 Days'"/>
+        </div>
+
+
+    </div>
+</template>
+
+<script setup>
+
+import Linechart from "@/Components/Dashboard/Linechart.vue";
+import {ref} from "vue";
+import {parse, format } from "date-fns";
+
+const props = defineProps(['series']);
+
+const tabs=['Loan', 'Return'];
+
+const activeTab = ref('Loan');
+
+const getLoanChartData = () =>{
+    return {
+        labels: Object.keys(props.series.daily_loan).map(x =>  format(parse(x, 'yyyy-MM-dd', new Date()), 'MMM-dd')),
+        datasets: [
+            {
+                label: 'Total Daily Loans',
+                data: Object.values(props.series.daily_loan),
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                tension: 0.3,
+                fill: true,
+            }
+        ]
+    }
+}
+
+const getReturnChartData = () =>{
+    return{
+            labels: Object.keys(props.series.daily_return).map(x =>  format(parse(x, 'yyyy-MM-dd', new Date()), 'MMM-dd')),
+            datasets: [
+                {
+                    label: 'Total Daily Loans',
+                    data: Object.values(props.series.daily_return),
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.3,
+                    fill: true,
+                }
+            ]
+        }
+}
+
+
+</script>

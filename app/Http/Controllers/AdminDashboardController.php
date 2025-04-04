@@ -19,7 +19,7 @@ class AdminDashboardController extends Controller
     {
         //
         $daily_loan = DB::table('bahts')
-            ->where('created_at', '>=', now()->subDays(30))
+            ->where('created_at', '>=', now()->subDays(10))
             ->where('is_loan', true)
             ->selectRaw('DATE(created_at) as date,  SUM(amount) as amount')
             ->groupBy('date')
@@ -27,7 +27,7 @@ class AdminDashboardController extends Controller
             ->pluck('amount', 'date');
 
         $daily_return = DB::table('bahts')
-            ->where('created_at', '>=', now()->subDays(30))
+            ->where('created_at', '>=', now()->subDays(10))
             ->where('is_loan', false)
             ->selectRaw('DATE(created_at) as date,  SUM(amount) as amount')
             ->groupBy('date')
@@ -44,8 +44,8 @@ class AdminDashboardController extends Controller
                     'total_users' => User::all()->count(),
                     'total_people' => Consumer::all()->count(),
                     'active_loan' => Consumer::all()->sum('amount'),
-                    'monthly_loan' => Baht::where('is_loan', true)->where('created_at', '>=', now()->subMonth())->sum('amount'),
-                    'monthly_return' => Baht::where('is_loan', false)->where('created_at', '>=', now()->subMonth())->sum('amount'),
+//                    'monthly_loan' => Baht::where('is_loan', true)->where('created_at', '>=', now()->subMonth())->sum('amount'),
+//                    'monthly_return' => Baht::where('is_loan', false)->where('created_at', '>=', now()->subMonth())->sum('amount'),
                 ],
                 'series' => [
                         'daily_loan' => $daily_loan,

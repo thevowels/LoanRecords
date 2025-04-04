@@ -1,12 +1,29 @@
 <template>
-    <Line :data="data" :options="options" />
+    <Line :data="data" :options="{
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: title
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: value => value.toLocaleString()
+        }
+      }
+    }
+  }" />
 </template>
 
 <script setup>
 
 import {computed} from "vue";
 
-const props = defineProps(['data']);
+const props = defineProps(['data', 'title']);
 
 const data = computed(() => props.data);
 import {
