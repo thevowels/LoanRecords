@@ -27,7 +27,7 @@
         </div>
         <div v-if="activeTab === 'Compare'">
             Return Chart
-            <Linechart :data="getCompareChartData()" :title="'Return amounts Over the last 10 Days'"/>
+            <Linechart :data="getCompareChartData()" :title="'Loan and Return comparison Over the last 10 Days'"/>
             <Barchart :data="getCompareChartData()"/>
         </div>
 
@@ -71,8 +71,8 @@ const getReturnChartData = () =>{
             {
                 label: 'Total Daily Returns',
                 data: Object.values(props.series.daily_return),
-                borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                borderColor: '#da1f18',
+                backgroundColor: '#da1f1820',
                 tension: 0.3,
                 fill: true,
             },
@@ -88,7 +88,7 @@ const getCompareChartData = () =>{
                 label: 'Total Daily Loans',
                 data: Object.values(props.series.daily_loan),
                 borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59, 130, 246, 0.3)',
+                backgroundColor: '#3b82f630',
                 tension: 0.3,
                 fill: true,
             },
@@ -96,7 +96,7 @@ const getCompareChartData = () =>{
                 label: 'Total Daily Returns',
                 data: Object.values(props.series.daily_return),
                 borderColor: '#da1f18',
-                backgroundColor: '#da1f1840',
+                backgroundColor: '#da1f1830',
                 tension: 0.3,
                 fill: true,
             },

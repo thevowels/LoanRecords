@@ -4,10 +4,8 @@
 
 ### 1. Enhanced User Experience
 - [ ] Add data visualization dashboard for loan statistics
-  - [x] Daily loan distribution charts
+  - [ ] Daily loan distribution charts
     *Description: Visual representation of loan distribution across months to identify trends and patterns*
-  - [ ] Payment trend analysis
-    *Description: Analyze payment patterns to predict future payment behaviors and identify potential risks*
   - [ ] Default rate visualization
     *Description: Graphical display of default rates to help identify problem areas and take preventive measures*
   - [ ] Revenue forecasting
@@ -15,17 +13,15 @@
 - [ ] Implement loan payment reminders and notifications
   - [ ] Email notifications
     *Description: Automated email alerts for upcoming payments, overdue loans, and important updates*
-  - [x] Browser notifications
+  - [ ] Browser notifications
     *Description: Real-time browser-based notifications for immediate user attention*
-  - [ ] In-app notifications
+  - [x] In-app notifications
     *Description: System notifications within the application for important updates and alerts*
   - [ ] Customizable reminder schedules
     *Description: Allow users to set their preferred notification timing and frequency*
 - [ ] Add export functionality for loan records
   - [ ] PDF reports with customizable templates
     *Description: Generate professional PDF reports with configurable layouts and branding*
-  - [ ] Excel exports with pivot tables
-    *Description: Export data to Excel with pre-configured pivot tables for quick analysis*
   - [ ] CSV exports for data analysis
     *Description: Raw data export in CSV format for external analysis and reporting*
   - [ ] Scheduled automated reports
@@ -35,8 +31,6 @@
     *Description: Update status for multiple loans simultaneously to save time*
   - [ ] Mass payment processing
     *Description: Process multiple payments in a single operation*
-  - [ ] Batch loan approvals
-    *Description: Approve multiple loans at once with consistent criteria*
   - [ ] Group communication
     *Description: Send messages or notifications to multiple borrowers simultaneously*
 - [ ] Add loan history timeline view
@@ -46,73 +40,19 @@
     *Description: Detailed record of all payments made on a loan*
   - [ ] Status change history
     *Description: Track and display all status changes throughout loan lifecycle*
-  - [ ] Document attachment history
-    *Description: Maintain and display history of all documents attached to the loan*
-- [ ] Implement dark mode support
-  - [ ] System preference detection
-    *Description: Automatically detect and apply user's system theme preference*
-  - [ ] Manual toggle
-    *Description: Allow users to manually switch between light and dark modes*
-  - [ ] Custom theme support
-    *Description: Enable customization of color schemes and themes*
-  - [ ] Accessibility considerations
-    *Description: Ensure dark mode meets accessibility standards and readability requirements*
-
 ### 2. Financial Features
 - [ ] Add interest calculation functionality
   - [ ] Simple interest calculation
     *Description: Calculate interest based on principal amount and time period*
   - [ ] Compound interest options
     *Description: Support for compound interest calculations with various compounding periods*
-  - [ ] Custom interest rate schedules
-    *Description: Allow setting different interest rates for different time periods*
   - [ ] Interest waiver management
     *Description: Track and manage interest waivers and adjustments*
-- [ ] Implement loan payment scheduling
-  - [ ] Flexible payment schedules
-    *Description: Support for various payment frequencies (daily, weekly, monthly, etc.)*
-  - [ ] Automated payment processing
-    *Description: Automatic processing of scheduled payments*
-  - [ ] Partial payment handling
-    *Description: Support for processing partial payments and tracking remaining balances*
-  - [ ] Payment rescheduling options
-    *Description: Allow modification of payment schedules with proper tracking*
 - [ ] Add loan status tracking
   - [ ] Active loans monitoring
     *Description: Track and display all currently active loans*
   - [ ] Overdue payment tracking
     *Description: Monitor and alert on overdue payments*
-  - [ ] Default risk assessment
-    *Description: Evaluate and display risk levels for potential defaults*
-  - [ ] Collection status updates
-    *Description: Track progress of collection efforts for overdue loans*
-- [ ] Implement loan installment plans
-  - [ ] Custom installment schedules
-    *Description: Create tailored payment plans based on borrower's capacity*
-  - [ ] Variable payment amounts
-    *Description: Support for varying payment amounts in installment plans*
-  - [ ] Grace period management
-    *Description: Configure and track grace periods for payments*
-  - [ ] Installment adjustment options
-    *Description: Allow modification of installment plans when needed*
-- [ ] Add financial reports and analytics
-  - [ ] Portfolio performance analysis
-    *Description: Comprehensive analysis of loan portfolio performance*
-  - [ ] Risk assessment reports
-    *Description: Detailed reports on portfolio risk and exposure*
-  - [ ] Revenue projections
-    *Description: Forecast future revenue based on current portfolio*
-  - [ ] Collection efficiency metrics
-    *Description: Measure and report on collection effectiveness*
-- [ ] Implement loan approval workflow
-  - [ ] Multi-level approval process
-    *Description: Support for hierarchical approval processes*
-  - [ ] Document verification system
-    *Description: Track and verify required documents for loan approval*
-  - [ ] Credit scoring integration
-    *Description: Integrate with credit scoring systems for risk assessment*
-  - [ ] Automated decision rules
-    *Description: Implement rules for automatic loan approval/rejection*
 
 ### 3. Security & Compliance
 - [ ] Add audit logging for all financial transactions
@@ -124,7 +64,7 @@
     *Description: Track all system access attempts and sessions*
   - [ ] Compliance reporting
     *Description: Generate reports required for regulatory compliance*
-- [ ] Implement two-factor authentication
+- [x] Implement two-factor authentication
   - [ ] Email verification
     *Description: Secondary authentication via email verification*
   - [ ] Authenticator app support
@@ -134,17 +74,13 @@
   - [ ] Device management
     *Description: Track and manage trusted devices for authentication*
 - [ ] Add data backup and recovery features
-  - [ ] Automated daily backups
-    *Description: Schedule automatic daily backups of critical data*
-  - [ ] Point-in-time recovery
+  - [ ] Automated weekly backups
+    *Description: Schedule automatic weekly backups of critical data*
+  - [x] Point-in-time recovery
     *Description: Ability to restore data to any specific point in time*
   - [ ] Backup verification
     *Description: Regular verification of backup integrity*
-  - [ ] Disaster recovery plan
-    *Description: Comprehensive plan for system recovery after disasters*
 - [ ] Implement role-based access control
-  - [ ] Granular permission system
-    *Description: Fine-grained control over user permissions*
   - [ ] Department-based access
     *Description: Access control based on organizational structure*
   - [ ] Time-based access control
@@ -152,35 +88,20 @@
   - [ ] Audit trail for access changes
     *Description: Track all changes to access permissions*
 - [ ] Add data encryption for sensitive information
-  - [ ] End-to-end encryption
-    *Description: Encrypt data throughout its lifecycle*
   - [ ] Secure key management
     *Description: Proper management of encryption keys*
   - [ ] Data masking
     *Description: Hide sensitive data from unauthorized users*
-  - [ ] Secure data transmission
-    *Description: Ensure secure transfer of data between systems*
 
 ### 4. Integration & Extensibility
 - [ ] Add API endpoints for third-party integrations
   - [ ] RESTful API documentation
     *Description: Comprehensive documentation of all API endpoints*
-  - [ ] API versioning
-    *Description: Support for multiple API versions*
   - [ ] Rate limiting
     *Description: Control API usage through rate limits*
   - [ ] Authentication methods
     *Description: Multiple authentication options for API access*
-- [ ] Implement webhook support for external notifications
-  - [ ] Event-based triggers
-    *Description: Trigger webhooks based on specific system events*
-  - [ ] Custom webhook configurations
-    *Description: Allow customization of webhook behavior*
-  - [ ] Retry mechanisms
-    *Description: Automatic retry of failed webhook calls*
-  - [ ] Webhook monitoring
-    *Description: Track and monitor webhook performance*
-- [ ] Implement email notifications
+- [x] Implement email notifications
   - [ ] Customizable templates
     *Description: Allow customization of email content and design*
   - [ ] Multi-language support
@@ -189,15 +110,6 @@
     *Description: Monitor email delivery status*
   - [ ] Notification preferences
     *Description: Allow users to customize their notification settings*
-- [ ] Add support for multiple currencies
-  - [ ] Exchange rate management
-    *Description: Track and update currency exchange rates*
-  - [ ] Multi-currency transactions
-    *Description: Support transactions in different currencies*
-  - [ ] Currency conversion
-    *Description: Automatic conversion between currencies*
-  - [ ] Financial reporting in multiple currencies
-    *Description: Generate reports in different currencies*
 
 ## Code Improvements
 
@@ -207,8 +119,6 @@
     *Description: Integrate Redis for high-performance caching*
   - [ ] Query result caching
     *Description: Cache database query results to improve performance*
-  - [ ] Page caching
-    *Description: Cache rendered pages for faster delivery*
   - [ ] Cache invalidation strategy
     *Description: Implement efficient cache invalidation mechanisms*
 - [ ] Add database indexing for better query performance
@@ -216,9 +126,9 @@
     *Description: Optimize database queries for better performance*
   - [ ] Index maintenance
     *Description: Regular maintenance of database indexes*
-  - [ ] Performance monitoring
+  - [x] Performance monitoring
     *Description: Monitor and analyze query performance*
-  - [ ] Query execution plans
+  - [x] Query execution plans
     *Description: Analyze and optimize query execution plans*
 - [ ] Implement API rate limiting
   - [ ] Request throttling
@@ -239,10 +149,6 @@
   - [ ] Validation error handling
     *Description: Proper handling of validation errors*
 - [ ] Implement proper error handling and logging
-  - [ ] Structured logging
-    *Description: Implement consistent logging format*
-  - [ ] Error tracking integration
-    *Description: Integrate with error tracking services*
   - [ ] Custom error pages
     *Description: User-friendly error pages*
   - [ ] Error notification system
@@ -257,7 +163,7 @@
   - [ ] Security tests
     *Description: Tests for security vulnerabilities*
 
-### 2. Code Quality
+### 2. Code Quality X
 - [ ] Add TypeScript support for better type safety
   - [ ] Type definitions
     *Description: Define types for all data structures*
@@ -325,10 +231,6 @@
 - [ ] Implement integration tests(Laravel Dusk)
   - [ ] API endpoint testing
     *Description: Test API endpoints comprehensively*
-  - [ ] Database integration
-    *Description: Test database interactions*
-  - [ ] External service mocking
-    *Description: Mock external service dependencies*
   - [ ] Test environment setup
     *Description: Configure test environments*
 - [ ] Add end-to-end testing (Laravel Dusk)
@@ -343,11 +245,9 @@
     *Description: Test system under various loads*
   - [ ] Stress testing
     *Description: Test system limits*
-  - [ ] Scalability testing
-    *Description: Test system scalability*
   - [ ] Benchmarking
     *Description: Establish performance benchmarks*
-- [ ] Add test coverage reporting
+- [x] Add test coverage reporting
   - [ ] Coverage metrics
     *Description: Define coverage measurement criteria*
   - [ ] Coverage thresholds
@@ -485,10 +385,6 @@
 ### 1. Scalability
 - [ ] Horizontal scaling support (Kubernetes Ready)
   *Description: Ability to add more servers to handle increased load*
-- [ ] Database sharding strategy
-  *Description: Distribute database load across multiple servers*
-- [ ] Load balancing configuration
-  *Description: Distribute traffic evenly across servers*
 - [ ] Caching strategy optimization
   *Description: Improve performance through effective caching*
 - [ ] Resource utilization monitoring
@@ -513,29 +409,19 @@
   *Description: Allow users to create custom reports*
 - [ ] Data export options
   *Description: Multiple formats for data export*
-- [ ] Dashboard customization
+- [x] Dashboard customization
   *Description: Personalize dashboard views*
 - [ ] Scheduled reports
   *Description: Automate report generation and distribution*
-- [ ] Analytics integration
-  *Description: Integrate with analytics tools*
 
 ### 5. Customer Support
-- [ ] Help center
-  *Description: Centralized resource for user assistance*
-- [ ] Knowledge base
-  *Description: Repository of helpful articles and guides*
 - [ ] Ticket system
   *Description: Track and manage support requests*
-- [ ] Live chat
-  *Description: Real-time support for users*
-- [ ] User feedback system
-  *Description: Collect and manage user feedback*
 
 ## Refactoring Improvements
 
 ### 1. Data Transfer Objects (DTOs)
-- [ ] Create DTOs for Loan Management
+- [x] Create DTOs for Loan Management
   - [ ] LoanDTO
     *Description: Standardize loan data structure and validation*
     - Properties: id, amount, interest_rate, term, status, borrower_id
@@ -570,12 +456,6 @@
     - Calculate interest
     - Update loan status
     - Generate loan statements
-  - [ ] PaymentService
-    *Description: Manage payment processing*
-    - Process payments
-    - Handle partial payments
-    - Generate payment receipts
-    - Track payment history
   - [ ] BorrowerService
     *Description: Manage borrower operations*
     - Borrower registration
@@ -592,8 +472,6 @@
   - [ ] ReportService
     *Description: Generate various reports*
     - Financial reports
-    - Portfolio analysis
-    - Risk assessment
     - Collection reports
 
 ### 3. Action Classes
@@ -687,25 +565,6 @@
     - Schedule initial payment
     - Notify all stakeholders
 
-- [ ] Payment Events
-  - [ ] PaymentReceived
-    *Description: Triggered when payment is received*
-    - Update loan balance
-    - Generate receipt
-    - Update payment history
-    - Trigger notifications
-  - [ ] PaymentOverdue
-    *Description: Triggered when payment is overdue*
-    - Send overdue notices
-    - Update loan status
-    - Trigger collection process
-    - Update risk metrics
-  - [ ] PaymentScheduled
-    *Description: Triggered when payment is scheduled*
-    - Create payment records
-    - Set up reminders
-    - Update payment calendar
-    - Notify borrower
 
 ### 6. Event Listeners
 - [ ] Notification Listeners
