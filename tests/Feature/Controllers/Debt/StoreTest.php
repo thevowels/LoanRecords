@@ -23,7 +23,7 @@ it('requires authentication', function (): void {
 
 it('can store a debt', function (): void {
     $user = User::factory()->create();
-    $consumer = Consumer::factory()->create();
+    $consumer = Consumer::factory()->for($user)->create();
 
     actingAs($user)
         ->post(route('people.debts.store', $consumer->id), [
@@ -40,9 +40,8 @@ it('can store a debt', function (): void {
 
 it('redirects to people show page', function (): void {
 
-    $this->withoutExceptionHandling();
     $user = User::factory()->create();
-    $consumer = Consumer::factory()->create();
+    $consumer = Consumer::factory()->for($user)->create();
 
     actingAs($user)
         ->post(route('people.debts.store', $consumer->id), [
