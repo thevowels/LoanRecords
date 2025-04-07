@@ -28,14 +28,18 @@ class DebtPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user, Consumer $consumer, string $currency): bool
+    public function create(User $user, Consumer $consumer, string $currency): Response
     {
         if (!($user->is_admin || $consumer->user_id === $user->id)){
-            return false;
+             return Response::deny("You are not authorized to create debt for this customer.",41);
+
         }
-        return !Debt::where('consumer_id',$consumer->id)
+        if( Debt::where('consumer_id',$consumer->id)
                 ->where('currency',$currency)
-                ->exists();
+                ->exists()){
+            return Response::deny("This currency already exists.",42);
+        }
+        return Response::allow();
 
     }
 

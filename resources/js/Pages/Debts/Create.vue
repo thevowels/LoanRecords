@@ -3,6 +3,9 @@
         <Container>
             <form @submit.prevent="submitDebt" class="space-y-4 p-8 border-indigo-700 border-2 rounded-lg mt-6  max-w-xl mx-auto">
                 <div>
+                    <InputError v-for="error in errors" :message="error" class="text-3xl font-bold"/>
+                </div>
+                <div>
                     <InputLabel for="currency">currency</InputLabel>
                     <select id="currency" v-model="form.currency" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm min-w-44">
                         <option v-for="currency in Currencies" :key="currency" :value="currency">{{currency}}</option>
@@ -15,13 +18,10 @@
                     <InputLabel for="limit" >Loan Limit</InputLabel>
                     <TextInput id="limit" v-model="form.limit" ></TextInput>
                     <InputError :message="form.errors.limit"></InputError>
-
                 </div>
                 <div class="text-right">
                     <PrimaryButton>Create</PrimaryButton>
-
                 </div>
-
             </form>
         </Container>
     </AppLayout>
@@ -39,8 +39,10 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 
 const Currencies = ['kyat', 'baht'];
-
+const props = defineProps(['errors']);
 const page = usePage();
+
+console.log(page.props.errors);
 const submitDebt = () => {
     form.post(route('people.debts.store', page.props.person))
 }

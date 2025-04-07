@@ -40,7 +40,11 @@ class DebtController extends Controller
             'limit' => ['required', 'numeric','integer',  'min:1'],
         ]);
 
-        Gate::authorize('create', [Debt::class, $person, $data['currency']]);
+        $response = Gate::inspect('create', [Debt::class, $person, $data['currency']]);
+
+        if(!$response->allowed()){
+            return back()->withErrors($response->message());
+        }
 
         Debt::create([
             'consumer_id' => $person->id,
