@@ -19,11 +19,13 @@ class DebtController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Consumer $consumer)
+    public function create(Consumer $person)
     {
 
 
-        return inertia('Debts/Create', []);
+        return inertia('Debts/Create', [
+            'person' => $person->id,
+        ]);
     }
 
     /**
@@ -33,7 +35,7 @@ class DebtController extends Controller
     {
         //
         $data =$request->validate([
-            'type' => ['required', 'string', 'in:kyat,baht'],
+            'currency' => ['required', 'string', 'in:kyat,baht'],
             'limit' => ['required', 'numeric','integer',  'min:1'],
         ]);
 

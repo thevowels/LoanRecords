@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('debts', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['kyat', 'baht'])->default('kyat');
+            $table->enum('currency', ['kyat', 'baht'])->default('kyat');
             $table->foreignIdFor(Consumer::class);
             $table->integer('amount')->default(0);
             $table->integer('limit')->default(10000);

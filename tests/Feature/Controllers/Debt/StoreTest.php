@@ -8,7 +8,7 @@ use function Pest\Laravel\post;
 
 beforeEach(function () {
     $this->validData = [
-        'type' => 'kyat',
+        'currency' => 'kyat',
         'limit'=> 30000
     ];
 });
@@ -32,7 +32,7 @@ it('can store a debt', function (): void {
 
     $this->assertDatabaseHas('debts', [
         'consumer_id' => $consumer->id,
-        'type' => $this->validData['type'],
+        'currency' => $this->validData['currency'],
         'limit' => $this->validData['limit'],
     ]);
 });
