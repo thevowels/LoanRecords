@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Consumer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class DebtFactory extends Factory
     public function definition(): array
     {
         return [
-
+            'type' => fake()->randomElement(['kyat', 'baht']),
+            'consumer_id' => Consumer::factory(),
+            'amount' => 0,
+            'limit' => 10000
         ];
     }
 }
