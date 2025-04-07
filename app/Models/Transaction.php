@@ -11,6 +11,16 @@ class Transaction extends Model
     /** @use HasFactory<\Database\Factories\TransactionFactory> */
     use HasFactory;
 
+    protected static function booted()
+    {
+        static::created(function ($transaction) {
+            if($transaction->type == 'loan') {
+                $transaction->debt->increment('amount', $transaction->amount);
+            }elseif($transaction->type == 'return') {
+                $transaction->debt->decrement('amount', $transaction->amount);
+            }
+        });
+    }
     public function debt(): BelongsTo
     {
         return $this->belongsTo(Debt::class);
