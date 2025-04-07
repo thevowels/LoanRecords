@@ -71,9 +71,16 @@
                         </p>
                         <p>{{consumer.country}}</p>
                         <p>{{consumer.city}}</p>
-                        <div class="py-3 px-4 border border-indigo-600 rounded-lg text-center font-bold text-lg ">
-                            Outstanding Amount
-                            <div>{{consumer.amount}}</div>
+                        <div class="py-3 px-4 font-bold text-lg  ">
+                            Accounts
+                            <div class="flex flex-col space-y-2 ">
+                                <div v-for="account in accounts" class=" border border-indigo-600 rounded-lg py-3 px-4">
+                                    <p>Currency {{account.currency}}</p>
+                                    <p>Current: {{account.balance}}</p>
+                                    <p>Limit  : {{account.limit}}</p>
+                                </div>
+
+                            </div>
                         </div>
                         <div class="py-4 space-x-8 text-center">
                             <Link v-if="consumer.amount === 0" :href="route('people.destroy', consumer)" method="delete" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">
@@ -136,7 +143,7 @@
 
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
-const props = defineProps(['consumer','bahts'])
+const props = defineProps(['consumer','bahts','accounts'])
 
 const formattedDate = (date) => computed( () => formatDate(date))
 import {Link, useForm} from "@inertiajs/vue3";

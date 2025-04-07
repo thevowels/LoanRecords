@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BahtResource;
 use App\Http\Resources\ConsumerResource;
+use App\Http\Resources\DebtResource;
 use App\Models\Baht;
 use App\Models\Consumer;
+use App\Models\Debt;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -91,6 +93,7 @@ class ConsumerController extends Controller
         return inertia('People/Show', [
             'consumer' => ConsumerResource::make($consumer),
             'bahts' => BahtResource::collection(Baht::with('consumer')->where('consumer_id', '=', $consumer->id)->latest()->latest('id')->paginate()),
+            'accounts' => DebtResource::collection(Debt::where('consumer_id', '=', $consumer->id)->latest('id')->get())
         ]);
     }
 
