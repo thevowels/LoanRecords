@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ConsumerResource;
+use App\Http\Resources\DebtResource;
 use App\Models\Consumer;
 use App\Models\Debt;
 use Illuminate\Http\Request;
@@ -62,6 +64,10 @@ class DebtController extends Controller
     public function show(Debt $debt)
     {
         //
+        return inertia('Debts/Show', [
+            'account' => DebtResource::make($debt),
+            'person' => ConsumerResource::make(Consumer::find($debt->consumer_id))
+        ]);
     }
 
     /**

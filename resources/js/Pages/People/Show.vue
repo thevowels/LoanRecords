@@ -74,11 +74,11 @@
                         <div class="py-3 px-4 font-bold text-lg  ">
                             Accounts
                             <div class="flex flex-col space-y-2 ">
-                                <div v-for="account in accounts" class=" border border-indigo-600 rounded-lg py-3 px-4">
+                                <Link  v-for="account in accounts" :href="route('debts.show', account.id)" class=" border border-indigo-600 rounded-lg py-3 px-4">
                                     <p>Currency {{account.currency}}</p>
                                     <p>Current: {{account.balance}}</p>
                                     <p>Limit  : {{account.limit}}</p>
-                                </div>
+                                </Link>
 
                             </div>
                         </div>
@@ -89,7 +89,6 @@
 
 <!--                            <div v-if="bahts.data.length !== 0 " class="text-center max-w-sm mx-auto mt-12">-->
 <!--                                <PrimaryButton @click="switchShow">Add Record</PrimaryButton>-->
-
 <!--                            </div>-->
 
                             <div class="text-center max-w-sm mx-auto mt-12">
