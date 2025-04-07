@@ -13,6 +13,24 @@ class Transaction extends Model
 
     protected static function booted()
     {
+        static::creating(function ($transaction) {
+            $debt = $transaction->debt;
+
+            if(!$debt) {
+                throw new \Exception('Debt not found');
+            }
+            if($transaction->type === 'loan') {
+                $newamount = $transaction->amount + $debt->amount;
+                if($newamount > $debt->limit) {
+                    throw new \Exception("Loan exceeds debt limit of {$debt->limit} .");
+                }
+            }else if ($transaction->type === 'return') {
+                if($transaction->amount > $debt->amount) {
+                    throw new \Exception("Cannot return more than current debt of {$debt->amount} .");
+                }
+            }
+
+        });
         static::created(function ($transaction) {
             if($transaction->type == 'loan') {
                 $transaction->debt->increment('amount', $transaction->amount);
