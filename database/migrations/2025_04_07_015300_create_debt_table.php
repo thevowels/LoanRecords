@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('amount')->default(0);
             $table->integer('limit')->default(10000);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
