@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('debts', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->enum('currency', ['kyat', 'baht'])->default('kyat');
             $table->foreignIdFor(Consumer::class);
             $table->integer('amount')->default(0);

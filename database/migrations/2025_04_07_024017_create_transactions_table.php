@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Debt::class)->constrained()->restrictOnDelete();
+            $table->uuid('debt_id');
+            $table->foreign('debt_id')->references('id')->on('debts')->onDelete('restrict');
             $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
             $table->enum('type',['loan', 'return'])->default('loan');
             $table->integer('amount')->default(0);

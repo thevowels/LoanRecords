@@ -8,11 +8,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
+
 class Debt extends Model
 {
     /** @use HasFactory<\Database\Factories\DebtFactory> */
     use HasFactory;
     use SoftDeletes;
+
+    protected $keyType = 'string';
+    public $incrementing = false;
+    protected static function booted()
+    {
+        static::creating(function ($debt) {
+            if(empty($debt->id)) {
+                $debt->id = (string) Str::uuid();
+            }
+        });
+    }
 
     public function consumer(): BelongsTo
     {
