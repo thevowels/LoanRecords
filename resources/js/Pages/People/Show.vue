@@ -83,14 +83,14 @@
                             </div>
                         </div>
                         <div class="py-4 space-x-8 text-center">
-                            <Link v-if="consumer.amount === 0" :href="route('people.destroy', consumer)" method="delete" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">
-                                Archive
-                            </Link>
+<!--                            <Link v-if="consumer.amount === 0" :href="route('people.destroy', consumer)" method="delete" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">-->
+<!--                                Archive-->
+<!--                            </Link>-->
 
-                            <div v-if="bahts.data.length !== 0 " class="text-center max-w-sm mx-auto mt-12">
-                                <PrimaryButton @click="switchShow">Add Record</PrimaryButton>
+<!--                            <div v-if="bahts.data.length !== 0 " class="text-center max-w-sm mx-auto mt-12">-->
+<!--                                <PrimaryButton @click="switchShow">Add Record</PrimaryButton>-->
 
-                            </div>
+<!--                            </div>-->
 
                             <div class="text-center max-w-sm mx-auto mt-12">
                                 <Link :href="route('people.debts.create', consumer)" method="get" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">

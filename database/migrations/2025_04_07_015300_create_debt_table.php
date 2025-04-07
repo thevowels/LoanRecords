@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('limit')->default(10000);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['consumer_id', 'currency']);
         });
     }
 

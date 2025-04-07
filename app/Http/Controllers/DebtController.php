@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Consumer;
 use App\Models\Debt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class DebtController extends Controller
 {
@@ -38,6 +39,8 @@ class DebtController extends Controller
             'currency' => ['required', 'string', 'in:kyat,baht'],
             'limit' => ['required', 'numeric','integer',  'min:1'],
         ]);
+
+        Gate::authorize('create', [Debt::class, $person, $data['currency']]);
 
         Debt::create([
             'consumer_id' => $person->id,
