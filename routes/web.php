@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\BahtController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DebtController;
 use App\Models\Consumer;
 
 use App\Http\Resources\ConsumerResource;
@@ -40,6 +41,8 @@ Route::middleware([
 
     Route::resource('consumers.bahts', BahtController::class)->shallow()->only(['store']);
     Route::get('/bahts', [BahtController::class, 'index'])->name('bahts.index');
+
+    Route::resource('consumers.debts', DebtController::class)->shallow();
 
 });
 
