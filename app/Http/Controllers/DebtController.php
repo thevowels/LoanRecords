@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consumer;
 use App\Models\Debt;
 use Illuminate\Http\Request;
 
@@ -18,17 +19,32 @@ class DebtController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Consumer $consumer)
     {
-        //
+
+
+        return inertia('Debts/Create', []);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Consumer $person)
     {
         //
+        $data =$request->validate([
+            'type' => ['required', 'string', 'in:kyat,baht'],
+            'limit' => ['required', 'numeric','integer',  'min:1'],
+        ]);
+
+        Debt::create([
+            'consumer_id' => $person->id,
+            ...$data,
+        ]);
+
+        return redirect(route('people.show', $person));
+
+
     }
 
     /**

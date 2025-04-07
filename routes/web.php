@@ -42,7 +42,7 @@ Route::middleware([
     Route::resource('consumers.bahts', BahtController::class)->shallow()->only(['store']);
     Route::get('/bahts', [BahtController::class, 'index'])->name('bahts.index');
 
-    Route::resource('consumers.debts', DebtController::class)->shallow();
+    Route::resource('people.debts', DebtController::class)->shallow();
 
 });
 
