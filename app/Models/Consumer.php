@@ -26,6 +26,11 @@ class Consumer extends Model
         return $this->hasMany(Baht::class);
     }
 
+    public function debts(): HasMany
+    {
+        return $this->hasMany(Debt::class);
+    }
+
 
 
 
