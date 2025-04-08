@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ConsumerResource;
 use App\Http\Resources\DebtResource;
+use App\Http\Resources\TransactionResource;
 use App\Models\Consumer;
 use App\Models\Debt;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -66,7 +68,8 @@ class DebtController extends Controller
         //
         return inertia('Debts/Show', [
             'account' => DebtResource::make($debt),
-            'person' => ConsumerResource::make(Consumer::find($debt->consumer_id))
+            'person' => ConsumerResource::make(Consumer::find($debt->consumer_id)),
+            'transactions' => TransactionResource::collection(Transaction::where('debt_id', $debt->id)->latest()->paginate()),
         ]);
     }
 

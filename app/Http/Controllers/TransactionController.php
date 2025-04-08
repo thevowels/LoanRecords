@@ -32,6 +32,7 @@ class TransactionController extends Controller
         //
         $data = $request->validate([
             'type' => ['required', 'string','in:loan,return'],
+            'comment' => ['nullable', 'string'],
             'amount' => ['required', 'numeric', 'integer', 'min:1',
                 function ($attribute, $value, $fail) use ($request, $debt) {
                     if(!is_numeric($value)) {

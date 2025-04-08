@@ -74,16 +74,40 @@
                         </CardContent>
                         <CardFooter>
                             <div class="text-right text-gray-700 font-semibold grid grid-cols-2 space-y-2 space-x-3">
-                                <h1>Max Loan Limit</h1><h1>{{account.limit}}</h1>
+                                <h1>Max Loan Limit</h1><h1 class="text-green-600">{{account.limit}}</h1>
                                 <h1>Current Loan</h1><h1>{{account.balance}}</h1>
                             </div>
                         </CardFooter>
                     </Card>
                 </div>
             </div>
-            <div class="max-w-3xl mx-auto">
+            <div class="max-w-3xl mx-auto mt-8">
                 <PrimaryButton @click="switchShow">Add Record</PrimaryButton>
+                <div class="max-w-md mx-auto space-y-1 divide-y-2">
+                    <div v-for="transaction in transactions.data" class="flex flex-row " >
+                        <div class="mr-2">
+                            <CreditCardIcon class="size-12 text-indigo-500  text-primary" v-if="transaction.type === 'loan' "/>
+                            <BanknotesIcon class="size-12  text-green-600" v-if="transaction.type !== 'loan' "/>
+                        </div>
+                        <div class="flex-auto">
+                            <div >
+                                <span class="font-extrabold capitalize ">{{transaction.type}} : </span>
+                                <span class="font-light">
+                                    {{ transaction.comment }}
+                                </span>
+                            </div>
+                            <div class="flex flex-row justify-between">
+                                <div class="text-left text-sm">
+                                    {{formatDate(transaction.created_at)}}
+                                </div>
+                                <div class="font-extrabold" :class="transaction.type === 'loan' ? 'text-gray-800': 'text-green-500'">
+                                    {{transaction.amount}} {{account.currencyCode}}
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </Container>
 
@@ -104,9 +128,12 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from "@headlessui/vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
-import {ExclamationTriangleIcon} from "@heroicons/vue/24/outline/index.js";
+import {CreditCardIcon, BanknotesIcon,  ExclamationTriangleIcon} from "@heroicons/vue/24/outline/index.js";
 import InputLabel from "@/Components/InputLabel.vue";
-const props = defineProps(['account', 'person'])
+import {formatDate} from "@/Utilities/date.js";
+
+
+const props = defineProps(['account', 'person', 'transactions'])
 
 
 import AppLayout from "@/Layouts/AppLayout.vue";
