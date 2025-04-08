@@ -26,11 +26,11 @@
                                                             <InputError :message="form.errors.amount" />
                                                         </div>
                                                         <div class="mt-3 w-full">
-                                                            <select id="is_loan" v-model="form.is_loan" class="w-full mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                                                <option :value="true">
+                                                            <select id="type" v-model="form.type" class="w-full mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                                                <option :value="'loan'">
                                                                     Loan
                                                                 </option>
-                                                                <option :value="false">
+                                                                <option :value="'return'">
                                                                     Return
                                                                 </option>
                                                             </select>
@@ -118,8 +118,10 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
+
 import {useForm} from "@inertiajs/vue3";
+
 const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -134,6 +136,7 @@ const options = {
         }
     }
 }
+
 const pieData = computed(() => ({
 
     labels: ['Current Loan', 'Available'],
@@ -149,9 +152,19 @@ const pieData = computed(() => ({
 
 const form = useForm({
     'amount': '0',
-    'is_loan': true,
+    'type': 'loan',
     'comment': '-',
 })
+
+const submitRecord = () => {
+    console.log(form.data());
+    form.post(route('debts.transactions.store', props.account.id),{
+        onSuccess: () => {
+            form.reset();
+            open.value = false;
+        }
+    });
+}
 
 const open = ref(false)
 const switchShow = () => open.value=!open.value;
