@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('debt_id')->references('id')->on('debts')->onDelete('restrict');
             $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
             $table->enum('type',['loan', 'return'])->default('loan');
+            $table->enum('currency', ['baht', 'kyat'])->default('baht');
             $table->integer('amount')->default(0);
             $table->string('comment')->nullable();
             $table->timestamps();

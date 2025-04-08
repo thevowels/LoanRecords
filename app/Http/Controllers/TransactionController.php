@@ -57,6 +57,7 @@ class TransactionController extends Controller
             ...$data,
             'debt_id' => (string) $debt->id,
             'user_id' => auth()->user()->id,
+            'currency' => $debt->currency
         ]);
 
         return redirect(route('debts.show', $debt->id));

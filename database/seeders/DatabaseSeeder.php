@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Consumer;
 use App\Models\User;
-use App\Models\Baht;
 
 use Illuminate\Database\Seeder;
 
@@ -58,9 +57,6 @@ class DatabaseSeeder extends Seeder
 //            $start->addDay();
 //        }
 //
-
-//        Baht::factory(100)->recycle($consumers)->create();
-//        Baht::factory(100)->recycle($testUserConsumers)->create();
 
 
 

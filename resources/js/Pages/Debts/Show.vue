@@ -84,29 +84,7 @@
             <div class="max-w-3xl mx-auto mt-8">
                 <PrimaryButton @click="switchShow">Add Record</PrimaryButton>
                 <div class="max-w-md mx-auto space-y-1 divide-y-2">
-                    <div v-for="transaction in transactions.data" class="flex flex-row " >
-                        <div class="mr-2">
-                            <CreditCardIcon class="size-12 text-indigo-500  text-primary" v-if="transaction.type === 'loan' "/>
-                            <BanknotesIcon class="size-12  text-green-600" v-if="transaction.type !== 'loan' "/>
-                        </div>
-                        <div class="flex-auto">
-                            <div >
-                                <span class="font-extrabold capitalize ">{{transaction.type}} : </span>
-                                <span class="font-light">
-                                    {{ transaction.comment }}
-                                </span>
-                            </div>
-                            <div class="flex flex-row justify-between">
-                                <div class="text-left text-sm">
-                                    {{formatDate(transaction.created_at)}}
-                                </div>
-                                <div class="font-extrabold" :class="transaction.type === 'loan' ? 'text-gray-800': 'text-green-500'">
-                                    {{transaction.amount}} {{account.currencyCode}}
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Transactions :account="props.account"/>
                 </div>
             </div>
         </Container>
@@ -148,6 +126,7 @@ import {
 } from '@/components/ui/card';
 
 import {useForm} from "@inertiajs/vue3";
+import Transactions from "@/Components/Transactions.vue";
 
 const options = {
     responsive: true,
@@ -189,6 +168,7 @@ const submitRecord = () => {
         onSuccess: () => {
             form.reset();
             open.value = false;
+            window.location.reload();
         }
     });
 }

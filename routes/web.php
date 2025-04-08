@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\BahtController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\TransactionController;
@@ -39,9 +38,6 @@ Route::middleware([
     Route::get('/people/create', [ConsumerController::class, 'create'])->name('people.create');
     Route::post('/people', [ConsumerController::class, 'store'])->name('people.store');
     Route::delete('/people/{consumer}', [ConsumerController::class, 'destroy'])->name('people.destroy');
-
-    Route::resource('consumers.bahts', BahtController::class)->shallow()->only(['store']);
-    Route::get('/bahts', [BahtController::class, 'index'])->name('bahts.index');
 
     Route::resource('people.debts', DebtController::class)->shallow();
     Route::resource('debts.transactions', TransactionController::class)->shallow()->only(['store','show', 'update']);
