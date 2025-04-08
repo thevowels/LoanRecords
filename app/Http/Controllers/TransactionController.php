@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Debt;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,41 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request , Debt $debt,)
     {
         //
+        $data = $request->validate([
+            'type' => ['required', 'string','in:loan,return'],
+            'comment' => ['nullable', 'string'],
+            'amount' => ['required', 'numeric', 'integer', 'min:1',
+                function ($attribute, $value, $fail) use ($request, $debt) {
+                    if(!is_numeric($value)) {
+                        return;
+                    }
+                    if($request->type === 'loan') {
+                        if( $debt->amount + $value > $debt->limit){
+                            return $fail("Loan exceeded the available amount of ". $debt->limit - $debt->amount . " {$debt->currency}");
+                        }
+                    }
+                    if($request->type === 'return') {
+                        if($debt->amount < $value){
+                            return $fail("Your debt is only {$debt->amount} {$debt->currency}");
+                        }
+                    }
+                }
+            ],
+        ]);
+
+
+        Transaction::create([
+            ...$data,
+            'debt_id' => (string) $debt->id,
+            'user_id' => auth()->user()->id,
+            'currency' => $debt->currency
+        ]);
+
+        return redirect(route('debts.show', $debt->id));
+
     }
 
     /**

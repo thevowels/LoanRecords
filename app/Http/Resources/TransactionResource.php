@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BahtResource extends JsonResource
+class TransactionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,13 +15,16 @@ class BahtResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'consumer' => ConsumerResource::make($this->whenLoaded('consumer')),
-            'is_loan' => $this->is_loan,
+            'id' =>  $this->id,
+            'debt_id' => $this->debt_id,
+            'user_id' => $this->user_id,
+            'type' => $this->type,
+            'currency' => $this->currency,
             'amount' => $this->amount,
             'comment' => $this->comment,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+
         ];
     }
 }

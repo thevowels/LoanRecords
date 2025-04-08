@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="p-6 bg-gray-50 mt-8 ">
-                            <DashboardCharts :series="series"></DashboardCharts>
+<!--                            <DashboardCharts :series="series"></DashboardCharts>-->
                     </div>
             </div>
         </div>
@@ -35,14 +35,12 @@
 </template>
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import DashboardCharts from "@/Components/Dashboard/DashboardCharts.vue";
-
-const props = defineProps(['people', 'bahts', 'summaries', 'series'])
+const props = defineProps(['people', 'summaries', 'series'])
 
 
 
 const kpiCards =  [
-    { label: "Active Loan", value: props.summaries.active_loan, click_route: false},
+    // { label: "Active Loan", value: props.summaries.active_loan, click_route: false},
     // { label: "Monthly Loan", value: props.summaries.monthly_loan },
     // { label: "Monthly Return", value: props.summaries.monthly_return },
     { label: "User Count", value: props.summaries.total_users, click_route: false },

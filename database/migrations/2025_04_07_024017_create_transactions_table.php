@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Debt;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->uuid('debt_id');
+            $table->foreign('debt_id')->references('id')->on('debts')->onDelete('restrict');
+            $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
+            $table->enum('type',['loan', 'return'])->default('loan');
+            $table->enum('currency', ['baht', 'kyat'])->default('baht');
+            $table->integer('amount')->default(0);
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
