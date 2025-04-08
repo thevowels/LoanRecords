@@ -36,4 +36,12 @@ class Debt extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function currencyCode(){
+        $currencyMapping = [
+            'kyat' => 'MMK',
+            'baht' => 'THB',
+        ];
+        return $currencyMapping[$this->currency];
+    }
 }

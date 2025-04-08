@@ -73,14 +73,22 @@
                         <p>{{consumer.city}}</p>
                         <div class="py-3 px-4 font-bold text-lg  ">
                             Accounts
-                            <div class="flex flex-col space-y-2 ">
-                                <Link  v-for="account in accounts" :href="route('debts.show', account.id)" class=" border border-indigo-600 rounded-lg py-3 px-4">
-                                    <p>Currency {{account.currency}}</p>
-                                    <p>Current: {{account.balance}}</p>
-                                    <p>Limit  : {{account.limit}}</p>
+                            <Card class="flex flex-col mb-3 w-fit " v-for="account in accounts">
+                                <Link   :href="route('debts.show', account.id)" class=" py-3 px-4">
+                                    <div class="flex flex-row space-x-4">
+                                        <div >
+                                            <p>Currency {{account.currency}}</p>
+                                            <p>Current: {{account.balance}}</p>
+                                            <p>Limit  : {{account.limit}}</p>
+                                        </div>
+                                        <div >
+                                            
+                                        </div>
+
+                                    </div>
                                 </Link>
 
-                            </div>
+                            </Card>
                         </div>
                         <div class="py-4 space-x-8 text-center">
 <!--                            <Link v-if="consumer.amount === 0" :href="route('people.destroy', consumer)" method="delete" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">-->
@@ -156,6 +164,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import Pagination from "@/Components/Pagination.vue";
+import {Card} from "@/components/ui/card/index.js";
 
 
 const form = useForm({

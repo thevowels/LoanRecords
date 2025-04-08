@@ -17,6 +17,7 @@ class DebtResource extends JsonResource
         return [
             'id' =>(string) $this->id,
             'currency' => $this->currency,
+            'currencyCode' => $this->currencyCode(),
             'consumer_id' => $this->consumer_id,
             'balance' => $this->amount,
             'limit' => $this->limit,
