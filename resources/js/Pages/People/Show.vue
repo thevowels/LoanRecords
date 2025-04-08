@@ -61,7 +61,7 @@
                     <div class="mx-auto">
                         <img src="https://dummyjson.com/icon/abc123/512" class="w-16 sm:w-fit" />
                     </div>
-                    <div class="space-y-2 ">
+                    <div class="space-y-2 mx-auto">
                         <h1 class="text-left text-xl font-bold pl-4">{{ consumer.name }}</h1>
                         <p v-if="consumer.phone"><span class="font-bold">Phone:</span> {{consumer.phone}}</p>
                         <p v-if="consumer.email">{{consumer.email}}</p>
@@ -71,24 +71,8 @@
                         </p>
                         <p>{{consumer.country}}</p>
                         <p>{{consumer.city}}</p>
-                        <div class="py-3 px-4 font-bold text-lg  ">
-                            Accounts
-                            <Card class="flex flex-col mb-3 w-fit " v-for="account in accounts">
-                                <Link   :href="route('debts.show', account.id)" class=" py-3 px-4">
-                                    <div class="flex flex-row space-x-4">
-                                        <div >
-                                            <p>Currency {{account.currency}}</p>
-                                            <p>Current: {{account.balance}}</p>
-                                            <p>Limit  : {{account.limit}}</p>
-                                        </div>
-                                        <div >
-                                            
-                                        </div>
-
-                                    </div>
-                                </Link>
-
-                            </Card>
+                        <div class=" px-4 font-bold text-lg" v-for="account in accounts">
+                            <DebtCard :account="account"/>
                         </div>
                         <div class="py-4 space-x-8 text-center">
 <!--                            <Link v-if="consumer.amount === 0" :href="route('people.destroy', consumer)" method="delete" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">-->
@@ -165,6 +149,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import Pagination from "@/Components/Pagination.vue";
 import {Card} from "@/components/ui/card/index.js";
+import DebtCard from "@/Components/Cards/DebtCard.vue";
 
 
 const form = useForm({

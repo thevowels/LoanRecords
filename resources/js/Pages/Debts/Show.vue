@@ -6,8 +6,6 @@
                     <h1 class="text-2xl font-extrabold text-gray-600 ">{{person.name}}</h1>
                     <h1>{{person.phone}}</h1>
                     <div class="text-lg font-bold text-gray-900">
-                        <p>Max Loan Limit <span>{{account.limit}}</span> </p>
-                        <p>Current Loan <span>{{account.balance}} </span> </p>
                     </div>
                 </div>
                 <div class="flex-1">
@@ -21,6 +19,10 @@
                             </div>
                         </CardContent>
                         <CardFooter>
+                            <div class="text-right text-gray-700 font-semibold grid grid-cols-2 space-y-2 space-x-3">
+                                <h1>Max Loan Limit</h1><h1>{{account.limit}}</h1>
+                                <h1>Current Loan</h1><h1>{{account.balance}}</h1>
+                            </div>
                         </CardFooter>
                     </Card>
                 </div>
