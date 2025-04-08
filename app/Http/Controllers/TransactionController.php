@@ -39,7 +39,7 @@ class TransactionController extends Controller
                     }
                     if($request->type === 'loan') {
                         if( $debt->amount + $value > $debt->limit){
-                            return $fail("Loan exceeded the available amount of {($debt->limit - $value)} {$debt->currency}");
+                            return $fail("Loan exceeded the available amount of ". $debt->limit - $debt->amount . " {$debt->currency}");
                         }
                     }
                     if($request->type === 'return') {
