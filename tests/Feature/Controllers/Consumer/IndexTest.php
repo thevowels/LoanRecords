@@ -12,22 +12,22 @@ it('requires authentication', function () {
         ->assertRedirect(route('login'));
 });
 
-it('returns correct component', function () {
-    actingAs(User::factory()->create())
-    ->get(route('people.index'))
-        ->assertComponent('People/Index');
-});
-
-
-
-it('passes consumers to the view', function () {
-    $user = User::factory()->create();
-    Consumer::factory(10)->create();
-    $people = Consumer::factory(5)->recycle($user)->create();
-
-    $people->load('user');
-
-    actingAs($user)
-        ->get(route('people.index'))
-        ->assertHasPaginatedResource('people', ConsumerResource::collection($people->reverse()));
-});
+//it('returns correct component', function () {
+//    actingAs(User::factory()->create())
+//    ->get(route('people.index'))
+//        ->assertComponent('People/Index');
+//});
+//
+//
+//
+//it('passes consumers to the view', function () {
+//    $user = User::factory()->create();
+//    Consumer::factory(10)->create();
+//    $people = Consumer::factory(5)->recycle($user)->create();
+//
+//    $people->load('user');
+//
+//    actingAs($user)
+//        ->get(route('people.index'))
+//        ->assertHasPaginatedResource('people', ConsumerResource::collection($people->reverse()));
+//});

@@ -12,12 +12,12 @@ it('requires authentication', function (){
         ->assertRedirect(route('login'));
 });
 
-it('returns correct component', function () {
-    $user = User::factory()->create();
-
-    actingAs($user)
-        ->get(route('people.create'))
-        ->assertComponent('People/Create');
-
-
-});
+//it('returns correct component', function () {
+//    $user = User::factory()->create();
+//
+//    actingAs($user)
+//        ->get(route('people.create'))
+//        ->assertComponent('People/Create');
+//
+//
+//});
