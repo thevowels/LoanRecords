@@ -71,8 +71,19 @@ class User extends Authenticatable
         return $this->hasMany(Consumer::class);
     }
 
-    public function bahts(): HasMany
+
+    public function transactions(): HasMany
     {
-        return $this->hasMany(Baht::class);
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function limits(): HasMany
+    {
+        return $this->hasMany(UserLimit::class);
+    }
+
+    public function limitForCurrency(string $currency): int
+    {
+        return $this->limits()->where('currency', $currency)->first()?->limit ?? 0;
     }
 }

@@ -21,9 +21,10 @@ class Consumer extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function bahts(): HasMany
+
+    public function debts(): HasMany
     {
-        return $this->hasMany(Baht::class);
+        return $this->hasMany(Debt::class);
     }
 
 

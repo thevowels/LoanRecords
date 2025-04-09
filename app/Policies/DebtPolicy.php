@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Baht;
 use App\Models\Consumer;
+use App\Models\Debt;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class BahtPolicy
+class DebtPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -20,7 +20,7 @@ class BahtPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Baht $baht): bool
+    public function view(User $user, Debt $debt): bool
     {
         return false;
     }
@@ -28,18 +28,25 @@ class BahtPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user, Consumer $consumer): bool
+    public function create(User $user, Consumer $consumer, string $currency): Response
     {
-        if( ! ($consumer->user_id === $user->id || $user->is_admin)) {
-            return false;
+        if (!($user->is_admin || $consumer->user_id === $user->id)){
+             return Response::deny("You are not authorized to create debt for this customer.",41);
+
         }
-        return true;
+        if( Debt::where('consumer_id',$consumer->id)
+                ->where('currency',$currency)
+                ->exists()){
+            return Response::deny("This currency already exists.",42);
+        }
+        return Response::allow();
+
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Baht $baht): bool
+    public function update(User $user, Debt $debt): bool
     {
         return false;
     }
@@ -47,7 +54,7 @@ class BahtPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Baht $baht): bool
+    public function delete(User $user, Debt $debt): bool
     {
         return false;
     }
@@ -55,7 +62,7 @@ class BahtPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Baht $baht): bool
+    public function restore(User $user, Debt $debt): bool
     {
         return false;
     }
@@ -63,7 +70,7 @@ class BahtPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Baht $baht): bool
+    public function forceDelete(User $user, Debt $debt): bool
     {
         return false;
     }

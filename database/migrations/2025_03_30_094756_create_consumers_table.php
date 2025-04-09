@@ -25,9 +25,6 @@ return new class extends Migration
             $table->string('country');
             $table->string('city');
 
-
-            $table->unsignedBigInteger('amount')->default(0)->nullable();
-
             $table->softDeletes();
 
 //            $table->string('photo_path', 2048)->nullable();

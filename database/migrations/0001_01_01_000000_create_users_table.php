@@ -21,9 +21,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->string('profile_photo_path', 2048)->nullable();
-
             $table->timestamps();
-
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Baht extends Model
+class UserLimit extends Model
 {
-    /** @use HasFactory<\Database\Factories\BahtFactory> */
+    /** @use HasFactory<\Database\Factories\UserLimitFactory> */
     use HasFactory;
 
-    public function consumer(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Consumer::class);
+        return $this->belongsTo(User::class);
     }
+
 }

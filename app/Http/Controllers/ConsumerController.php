@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\BahtResource;
 use App\Http\Resources\ConsumerResource;
-use App\Models\Baht;
+use App\Http\Resources\DebtResource;
 use App\Models\Consumer;
+use App\Models\Debt;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -21,41 +21,42 @@ class ConsumerController extends Controller
     {
 
         $sortValue = $request->query('sort') ? $request->query('sort') :  'id';
+        $sortOrder = $request->query('sortOrder') ? $request->query('sortOrder') : 'asc';
 
         if($request->user()->is_admin){
             $people = Consumer::with('user')
                 ->when($request->query('query'),
                     fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
-                )
-                ->orderBy($sortValue, 'desc');
+                );
         }else{
             $people = Consumer::with('user')
                 ->where('user_id', '=', $request->user()->id)
                 ->when($request->query('query'),
                     fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
-                )
-                ->orderBy($sortValue, 'desc');
+                );
+        }
+        if($sortValue === 'id'){
+            $people = $people->latest()->latest('id');
+        }else{
+            $people = $people->orderBy($sortValue, $sortOrder);
         }
 
         return inertia('People/Index',[
             'people'=> ConsumerResource::collection($people->paginate()->withQueryString()),
             'query' => $request->query('query'),
             'sort' => $request->query('sort'),
+            'sortOrder' => $request->query('sortOrder'),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-
-
-
     public function create()
     {
         //
         return inertia('People/Create',[]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -90,7 +91,7 @@ class ConsumerController extends Controller
     {
         return inertia('People/Show', [
             'consumer' => ConsumerResource::make($consumer),
-            'bahts' => BahtResource::collection(Baht::with('consumer')->where('consumer_id', '=', $consumer->id)->latest()->latest('id')->paginate()),
+            'accounts' => DebtResource::collection(Debt::where('consumer_id', '=', $consumer->id)->latest('id')->get())
         ]);
     }
 
