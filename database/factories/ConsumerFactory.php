@@ -44,8 +44,6 @@ class ConsumerFactory extends Factory
             'country' => fake()->country(),
             'city' => fake()->city(),
 
-            'amount' => rand(1000,100000)
-
 
         ];
     }

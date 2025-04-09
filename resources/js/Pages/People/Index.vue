@@ -30,7 +30,6 @@
                                     <select v-model="searchForm.sort"  @change="search">
                                         <option value="id">Latest</option>
                                         <option value="name">Name</option>
-                                        <option value="amount">Amount</option>
                                     </select>
                                     <InputLabel for="query" class="sr-only">Search</InputLabel>
                                     <TextInput v-model="searchForm.query" id="query" class="w-full"/>
@@ -48,10 +47,6 @@
 
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center ">{{consumer.name}}</h5>
                         <p class="font-normal text-gray-700 dark:text-gray-400">{{consumer.city}}</p>
-                        <p class="font-mono text-gray-800 ">
-                            <span>Amount : </span>
-                            {{consumer.amount}} KS
-                        </p>
                         <div class="text-center">
                             <a :href="route('people.show', consumer)" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">Details</a>
                         </div>
