@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Debt;
 use App\Models\Transaction;
+use App\Models\UserLimit;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -39,8 +40,23 @@ class TransactionController extends Controller
                         return;
                     }
                     if($request->type === 'loan') {
+
+                        $currentUserActiveLoans = Debt::join('consumers', 'debts.consumer_id', '=', 'consumers.id')
+                                                        ->where('consumers.user_id', $request->user()->id)
+                                                        ->where('debts.currency', $debt->currency)
+                                                        ->sum('debts.amount');
+
+//                         dd('currentUserActive ', $currentUserActiveLoans);
+
+                        if(!UserLimit::where('user_id', $request->user()->id)->where('currency', $debt->currency)){
+                            return $fail("You don't have persmission to create loan of" . $debt->currency . " currency");
+                        }
+                        $currentUserLimit = $request->user()->limitForCurrency($debt->currency);
+//                        dd('currentUserLimit ', $currentUserLimit);
                         if( $debt->amount + $value > $debt->limit){
                             return $fail("Loan exceeded the available amount of ". $debt->limit - $debt->amount . " {$debt->currency}");
+                        }else if($currentUserLimit < $currentUserActiveLoans + $value){
+                            return $fail(" You have exceeded your loan amount for " . $debt->currencyCode());
                         }
                     }
                     if($request->type === 'return') {
