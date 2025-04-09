@@ -52,15 +52,11 @@ class ConsumerController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-
-
-
     public function create()
     {
         //
         return inertia('People/Create',[]);
     }
-
     /**
      * Store a newly created resource in storage.
      */

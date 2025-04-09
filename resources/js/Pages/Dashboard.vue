@@ -8,7 +8,8 @@ const props = defineProps(['people', 'summaries', 'series'])
 
 const kpiCards =  [
     { label: "Consumer Count" , value: props.summaries.total_people, suffix:'',  click_route:'/people'},
-    { label: "Active Loan", value: props.summaries.active_loan , suffix: 'THB', click_route: false},
+    { label: "Bahts", value: props.summaries.baht_loan , suffix: 'THB', click_route: false},
+    { label: "Kyats", value: props.summaries.kyat_loan , suffix: 'MMK', click_route: false},
 ]
 
 
