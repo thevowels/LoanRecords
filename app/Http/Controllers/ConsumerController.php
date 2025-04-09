@@ -21,26 +21,31 @@ class ConsumerController extends Controller
     {
 
         $sortValue = $request->query('sort') ? $request->query('sort') :  'id';
+        $sortOrder = $request->query('sortOrder') ? $request->query('sortOrder') : 'asc';
 
         if($request->user()->is_admin){
             $people = Consumer::with('user')
                 ->when($request->query('query'),
                     fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
-                )
-                ->orderBy($sortValue, 'desc');
+                );
         }else{
             $people = Consumer::with('user')
                 ->where('user_id', '=', $request->user()->id)
                 ->when($request->query('query'),
                     fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
-                )
-                ->orderBy($sortValue, 'desc');
+                );
+        }
+        if($sortValue === 'id'){
+            $people = $people->latest()->latest('id');
+        }else{
+            $people = $people->orderBy($sortValue, $sortOrder);
         }
 
         return inertia('People/Index',[
             'people'=> ConsumerResource::collection($people->paginate()->withQueryString()),
             'query' => $request->query('query'),
             'sort' => $request->query('sort'),
+            'sortOrder' => $request->query('sortOrder'),
         ]);
     }
 

@@ -31,6 +31,7 @@
                                         <option value="id">Latest</option>
                                         <option value="name">Name</option>
                                     </select>
+
                                     <InputLabel for="query" class="sr-only">Search</InputLabel>
                                     <TextInput v-model="searchForm.query" id="query" class="w-full"/>
                                     <SecondaryButton type="submit">Search</SecondaryButton>
@@ -76,7 +77,7 @@ import {ref} from "vue";
 
 
 
-const props = defineProps(['people', 'query', 'sort']);
+const props = defineProps(['people', 'query', 'sort', 'sortOrder']);
 
 const page = usePage();
 
@@ -85,6 +86,7 @@ const filter = ref(false);
 const searchForm = useForm({
     query: props.query,
     sort: props.sort || 'id',
+    sortOrder: props.sortOrder || 'asc',
     page: 1
 });
 
