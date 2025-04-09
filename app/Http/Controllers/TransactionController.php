@@ -46,7 +46,6 @@ class TransactionController extends Controller
                                                         ->where('debts.currency', $debt->currency)
                                                         ->sum('debts.amount');
 
-//                         dd('currentUserActive ', $currentUserActiveLoans);
 
                         if(!UserLimit::where('user_id', $request->user()->id)->where('currency', $debt->currency)){
                             return $fail("You don't have persmission to create loan of" . $debt->currency . " currency");
