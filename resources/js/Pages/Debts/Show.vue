@@ -55,6 +55,9 @@
                     </div>
                 </Dialog>
             </TransitionRoot>
+            <div class="text-right max-w-5xl mx-auto my-3">
+                <PrimaryButton @click="goBack">Back</PrimaryButton>
+            </div>
             <div class="flex flex-col md:flex-row">
                 <div class="flex-1 text-center mb-8">
                     <h1 class="text-2xl font-extrabold text-gray-600 ">{{person.name}}</h1>
@@ -171,6 +174,9 @@ const submitRecord = () => {
             window.location.reload();
         }
     });
+}
+const goBack = () =>{
+    window.history.back();
 }
 
 const open = ref(false)

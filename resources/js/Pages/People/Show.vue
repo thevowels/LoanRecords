@@ -3,6 +3,10 @@
         <Container>
 
             <div class="container">
+                <div class="text-right max-w-5xl mx-auto my-3">
+                    <PrimaryButton @click="goBack">Back</PrimaryButton>
+                </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 ">
                     <div class="mx-auto">
                         <img src="https://dummyjson.com/icon/abc123/512" class="w-16 sm:w-fit" />
@@ -52,7 +56,7 @@ import {formatDate} from "@/Utilities/date.js";
 import Pagination from "@/Components/Pagination.vue";
 import DebtCard from "@/Components/Cards/DebtCard.vue";
 
-
+const goBack = () => window.history.back();
 
 const switchShow = () => open.value=!open.value;
 </script>
