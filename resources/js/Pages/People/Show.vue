@@ -3,6 +3,10 @@
         <Container>
 
             <div class="container">
+                <div class="text-right max-w-5xl mx-auto my-3">
+                    <PrimaryButton @click="goBack">Back</PrimaryButton>
+                </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 ">
                     <div class="mx-auto">
                         <img src="https://dummyjson.com/icon/abc123/512" class="w-16 sm:w-fit" />
@@ -25,10 +29,7 @@
                                 <Link :href="route('people.debts.create', consumer)" method="get" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">
                                     Create Account
                                 </Link>
-
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -52,7 +53,7 @@ import {formatDate} from "@/Utilities/date.js";
 import Pagination from "@/Components/Pagination.vue";
 import DebtCard from "@/Components/Cards/DebtCard.vue";
 
-
+const goBack = () => window.history.back();
 
 const switchShow = () => open.value=!open.value;
 </script>

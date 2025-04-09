@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="p-6 bg-gray-50 mt-8 ">
-<!--                            <DashboardCharts :series="series"></DashboardCharts>-->
+                            <DashboardCharts :series="series"></DashboardCharts>
                     </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 const props = defineProps(['people', 'summaries', 'series'])
-
+import DashboardCharts from "@/Components/Dashboard/DashboardCharts.vue";
 
 
 const kpiCards =  [

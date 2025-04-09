@@ -24,6 +24,41 @@ class AdminDashboardController extends Controller
 //            ->orderBy('date')
 //            ->pluck('amount', 'date');
 
+        $bahts = [
+            'loan' => DB::table('transactions')
+                ->where('currency', 'baht')
+                ->where('created_at' , '>=', now()->subDays(15))
+                ->where('type' , 'loan')
+                ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
+                ->groupBy('date')
+                ->pluck('total', 'date'),
+            'return' => DB::table('transactions')
+                ->where('currency', 'baht')
+                ->where('created_at' , '>=', now()->subDays(15))
+                ->where('type' , 'return')
+                ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
+                ->groupBy('date')
+                ->pluck('total', 'date'),
+
+
+        ];
+        $kyats = [
+            'loan' => DB::table('transactions')
+                ->where('currency', 'kyat')
+                ->where('created_at' , '>=', now()->subDays(15))
+                ->where('type' , 'loan')
+                ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
+                ->groupBy('date')
+                ->pluck('total', 'date'),
+            'return' => DB::table('transactions')
+                ->where('currency', 'kyat')
+                ->where('created_at' , '>=', now()->subDays(15))
+                ->where('type' , 'return')
+                ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
+                ->groupBy('date')
+                ->pluck('total', 'date')
+        ];
+
 //        $daily_return = DB::table('bahts')
 //            ->where('created_at', '>=', now()->subDays(10))
 //            ->where('is_loan', false)
@@ -45,8 +80,8 @@ class AdminDashboardController extends Controller
 //                    'monthly_return' => Baht::where('is_loan', false)->where('created_at', '>=', now()->subMonth())->sum('amount'),
                 ],
                 'series' => [
-//                        'daily_loan' => $daily_loan,
-//                        'daily_return' => $daily_return,
+                        'baht' => $bahts,
+                        'kyat' => $kyats,
                     ]
 
             ]);

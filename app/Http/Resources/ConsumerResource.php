@@ -24,7 +24,6 @@ class ConsumerResource extends JsonResource
             'updated_at' => $this->updated_at,
             'user' => UserResource::make($this->whenLoaded('user')),
             'user_id' => $this->user_id,
-            'amount' => $this->amount,
             'identification_type' => $this->identification_type,
             'identification_number' => $this->identification_number,
         ];
