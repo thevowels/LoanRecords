@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Consumer;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ConsumerPolicy
 {
@@ -45,12 +44,12 @@ class ConsumerPolicy
      */
     public function delete(User $user, Consumer $consumer): bool
     {
-        if($user->id === $consumer->user_id)
-        {
-            if($consumer->amount === 0){
+        if ($user->id === $consumer->user_id) {
+            if ($consumer->amount === 0) {
                 return true;
             }
         }
+
         return false;
     }
 

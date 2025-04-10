@@ -21,7 +21,7 @@ class DebtFactory extends Factory
             'currency' => fake()->randomElement(['kyat', 'baht']),
             'consumer_id' => Consumer::factory(),
             'amount' => 0,
-            'limit' => 10000
+            'limit' => 10000,
         ];
     }
 }

@@ -15,5 +15,4 @@ class UserLimit extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

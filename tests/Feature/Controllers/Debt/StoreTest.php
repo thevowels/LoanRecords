@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use App\Models\Consumer;
+use App\Models\User;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\post;
@@ -9,7 +9,7 @@ use function Pest\Laravel\post;
 beforeEach(function () {
     $this->validData = [
         'currency' => 'kyat',
-        'limit'=> 30000
+        'limit' => 30000,
     ];
 });
 
@@ -20,14 +20,13 @@ it('requires authentication', function (): void {
         ->assertRedirect(route('login'));
 });
 
-
 it('can store a debt', function (): void {
     $user = User::factory()->create();
     $consumer = Consumer::factory()->for($user)->create();
 
     actingAs($user)
         ->post(route('people.debts.store', $consumer->id), [
-            ...$this->validData
+            ...$this->validData,
         ]);
 
     $this->assertDatabaseHas('debts', [
@@ -37,7 +36,6 @@ it('can store a debt', function (): void {
     ]);
 });
 
-
 it('redirects to people show page', function (): void {
 
     $user = User::factory()->create();
@@ -45,9 +43,8 @@ it('redirects to people show page', function (): void {
 
     actingAs($user)
         ->post(route('people.debts.store', $consumer->id), [
-            ...$this->validData
+            ...$this->validData,
         ])
         ->assertRedirect(route('people.show', $consumer->id));
 
 });
-

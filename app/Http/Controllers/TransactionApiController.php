@@ -15,6 +15,7 @@ class TransactionApiController extends Controller
     {
         //
         $debt_id = $request->input('debt_id');
-        return (TransactionResource::collection(Transaction::where('debt_id', $debt_id)->latest()->paginate()));
+
+        return TransactionResource::collection(Transaction::where('debt_id', $debt_id)->latest()->paginate());
     }
 }

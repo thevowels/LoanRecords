@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('user_limits', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
-            $table->enum('currency', ['kyat','baht']);
+            $table->enum('currency', ['kyat', 'baht']);
             $table->unsignedBigInteger('limit');
             $table->unique(['user_id', 'currency']);
             $table->timestamps();

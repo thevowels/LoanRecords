@@ -16,29 +16,30 @@ class Transaction extends Model
         static::creating(function ($transaction) {
             $debt = $transaction->debt;
 
-            if(!$debt) {
+            if (! $debt) {
                 throw new \Exception('Debt not found');
             }
-            if($transaction->type === 'loan') {
+            if ($transaction->type === 'loan') {
                 $newamount = $transaction->amount + $debt->amount;
-                if($newamount > $debt->limit) {
+                if ($newamount > $debt->limit) {
                     throw new \Exception("Loan exceeds debt limit of {$debt->limit} .");
                 }
-            }else if ($transaction->type === 'return') {
-                if($transaction->amount > $debt->amount) {
+            } elseif ($transaction->type === 'return') {
+                if ($transaction->amount > $debt->amount) {
                     throw new \Exception("Cannot return more than current debt of {$debt->amount} .");
                 }
             }
 
         });
         static::created(function ($transaction) {
-            if($transaction->type == 'loan') {
+            if ($transaction->type == 'loan') {
                 $transaction->debt->increment('amount', $transaction->amount);
-            }elseif($transaction->type == 'return') {
+            } elseif ($transaction->type == 'return') {
                 $transaction->debt->decrement('amount', $transaction->amount);
             }
         });
     }
+
     public function debt(): BelongsTo
     {
         return $this->belongsTo(Debt::class);
