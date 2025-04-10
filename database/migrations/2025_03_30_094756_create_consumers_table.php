@@ -27,8 +27,7 @@ return new class extends Migration
 
             $table->softDeletes();
 
-//            $table->string('photo_path', 2048)->nullable();
-
+            //            $table->string('photo_path', 2048)->nullable();
 
             $table->timestamps();
         });

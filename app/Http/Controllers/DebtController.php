@@ -27,7 +27,6 @@ class DebtController extends Controller
     public function create(Consumer $person)
     {
 
-
         return inertia('Debts/Create', [
             'person' => $person->id,
         ]);
@@ -39,14 +38,14 @@ class DebtController extends Controller
     public function store(Request $request, Consumer $person)
     {
         //
-        $data =$request->validate([
+        $data = $request->validate([
             'currency' => ['required', 'string', 'in:kyat,baht'],
-            'limit' => ['required', 'numeric','integer',  'min:1'],
+            'limit' => ['required', 'numeric', 'integer',  'min:1'],
         ]);
 
         $response = Gate::inspect('create', [Debt::class, $person, $data['currency']]);
 
-        if(!$response->allowed()){
+        if (! $response->allowed()) {
             return back()->withErrors($response->message());
         }
 
@@ -56,7 +55,6 @@ class DebtController extends Controller
         ]);
 
         return redirect(route('people.show', $person));
-
 
     }
 

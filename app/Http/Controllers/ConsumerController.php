@@ -6,11 +6,9 @@ use App\Http\Resources\ConsumerResource;
 use App\Http\Resources\DebtResource;
 use App\Models\Consumer;
 use App\Models\Debt;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Inertia\Inertia;
 
 class ConsumerController extends Controller
 {
@@ -20,29 +18,29 @@ class ConsumerController extends Controller
     public function index(Request $request)
     {
 
-        $sortValue = $request->query('sort') ? $request->query('sort') :  'id';
+        $sortValue = $request->query('sort') ? $request->query('sort') : 'id';
         $sortOrder = $request->query('sortOrder') ? $request->query('sortOrder') : 'asc';
 
-        if($request->user()->is_admin){
+        if ($request->user()->is_admin) {
             $people = Consumer::with('user')
                 ->when($request->query('query'),
-                    fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
+                    fn (Builder $builder) => $builder->where('name', 'like', '%'.$request->query('query').'%')
                 );
-        }else{
+        } else {
             $people = Consumer::with('user')
                 ->where('user_id', '=', $request->user()->id)
                 ->when($request->query('query'),
-                    fn (Builder $builder ) => $builder->where('name', 'like', '%' . $request->query('query') . '%')
+                    fn (Builder $builder) => $builder->where('name', 'like', '%'.$request->query('query').'%')
                 );
         }
-        if($sortValue === 'id'){
+        if ($sortValue === 'id') {
             $people = $people->latest()->latest('id');
-        }else{
+        } else {
             $people = $people->orderBy($sortValue, $sortOrder);
         }
 
-        return inertia('People/Index',[
-            'people'=> ConsumerResource::collection($people->paginate()->withQueryString()),
+        return inertia('People/Index', [
+            'people' => ConsumerResource::collection($people->paginate()->withQueryString()),
             'query' => $request->query('query'),
             'sort' => $request->query('sort'),
             'sortOrder' => $request->query('sortOrder'),
@@ -55,8 +53,9 @@ class ConsumerController extends Controller
     public function create()
     {
         //
-        return inertia('People/Create',[]);
+        return inertia('People/Create', []);
     }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -65,7 +64,7 @@ class ConsumerController extends Controller
         //
 
         $validated = $request->validate([
-            'name' => ['required', 'string','min:5', 'max:255'],
+            'name' => ['required', 'string', 'min:5', 'max:255'],
             'email' => ['nullable',  'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:15'],
             'identification_type' => ['required'],
@@ -91,7 +90,7 @@ class ConsumerController extends Controller
     {
         return inertia('People/Show', [
             'consumer' => ConsumerResource::make($consumer),
-            'accounts' => DebtResource::collection(Debt::where('consumer_id', '=', $consumer->id)->latest('id')->get())
+            'accounts' => DebtResource::collection(Debt::where('consumer_id', '=', $consumer->id)->latest('id')->get()),
         ]);
     }
 
@@ -114,11 +113,12 @@ class ConsumerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request,Consumer $consumer)
+    public function destroy(Request $request, Consumer $consumer)
     {
         Gate::authorize('delete', [Consumer::class, $consumer]);
 
         $consumer->delete();
+
         return redirect(route('people.index'))
             ->banner('consumer archived successfully');
     }

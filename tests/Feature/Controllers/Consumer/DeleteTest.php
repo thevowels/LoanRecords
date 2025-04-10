@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use App\Models\Consumer;
+use App\Models\User;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\delete;
@@ -20,8 +20,7 @@ it('user can delete only consumers which he created', function (): void {
         ->assertForbidden();
 });
 
-
-//it('consumer can be soft deleted', function (): void {
+// it('consumer can be soft deleted', function (): void {
 //    $user = User::factory()->create();
 //    $consumer = Consumer::factory()->for($user)->create(['amount' => 0]);
 //
@@ -31,8 +30,8 @@ it('user can delete only consumers which he created', function (): void {
 //    $consumer->refresh();
 //
 //    $this->assertSoftDeleted(Consumer::class, ['id' => $consumer->id]);
-//});
-//it('cannot delete consumer if their balance is not zero', function (): void {
+// });
+// it('cannot delete consumer if their balance is not zero', function (): void {
 //    $user = User::factory()->create();
 //    $consumer = Consumer::factory()->for($user)->create();
 //    $consumer->amount=100;
@@ -42,4 +41,4 @@ it('user can delete only consumers which he created', function (): void {
 //        ->delete(route('people.destroy', $consumer))
 //        ->assertForbidden();
 //
-//});
+// });

@@ -17,6 +17,7 @@ class User extends Authenticatable
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
@@ -70,7 +71,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Consumer::class);
     }
-
 
     public function transactions(): HasMany
     {

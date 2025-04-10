@@ -4,16 +4,14 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Consumer>
  */
-
 const id_types = [
     'NRC',
     'Passport',
-    'Work Permit'
+    'Work Permit',
 
 ];
 
@@ -43,7 +41,6 @@ class ConsumerFactory extends Factory
 
             'country' => fake()->country(),
             'city' => fake()->city(),
-
 
         ];
     }

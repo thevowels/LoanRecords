@@ -1,18 +1,16 @@
 <?php
 
-use function Pest\Laravel\get;
-use function Pest\Laravel\actingAs;
-
-
 use App\Models\User;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
 
-it('requires authentication', function (){
+it('requires authentication', function () {
     get(route('people.create'))
         ->assertRedirect(route('login'));
 });
 
-//it('returns correct component', function () {
+// it('returns correct component', function () {
 //    $user = User::factory()->create();
 //
 //    actingAs($user)
@@ -20,4 +18,4 @@ it('requires authentication', function (){
 //        ->assertComponent('People/Create');
 //
 //
-//});
+// });

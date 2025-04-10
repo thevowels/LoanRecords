@@ -1,17 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\ConsumerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\TransactionController;
-use App\Models\Consumer;
-
 use App\Http\Resources\ConsumerResource;
-
-use App\Http\Controllers\ConsumerController;
+use App\Models\Consumer;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -40,11 +37,10 @@ Route::middleware([
     Route::delete('/people/{consumer}', [ConsumerController::class, 'destroy'])->name('people.destroy');
 
     Route::resource('people.debts', DebtController::class)->shallow();
-    Route::resource('debts.transactions', TransactionController::class)->shallow()->only(['store','show', 'update']);
+    Route::resource('debts.transactions', TransactionController::class)->shallow()->only(['store', 'show', 'update']);
 
 });
 
-
 Route::get('/test', function () {
-    return  ConsumerResource::make(Consumer::with('user')->find(1));
+    return ConsumerResource::make(Consumer::with('user')->find(1));
 });
