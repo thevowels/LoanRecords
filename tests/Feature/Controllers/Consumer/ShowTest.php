@@ -12,21 +12,21 @@ it('requires authentication', function () {
         ->assertRedirect(route('login'));
 });
 
-// it('returns correct component', function(){
-//
-//    $consumer = Consumer::factory()->create();
-//    actingAs(User::factory()->create())
-//        ->get(route('people.show', $consumer))
-//        ->assertComponent('People/Show');
-// });
-//
-// it('returns correct Consumer', function(){
-//
-//    $consumer = Consumer::factory()->create();
-//
-//    actingAs(User::factory()->create())
-//        ->get(route('people.show', $consumer))
-//        ->assertHasResource('consumer',  ConsumerResource::make($consumer));
-//
-// });
-//
+ it('returns correct component', function(){
+
+    $consumer = Consumer::factory()->create();
+    actingAs(User::factory()->create())
+        ->get(route('people.show', $consumer))
+        ->assertComponent('People/Show');
+ });
+
+ it('returns correct Consumer', function(){
+
+    $consumer = Consumer::factory()->create();
+
+    actingAs(User::factory()->create())
+        ->get(route('people.show', $consumer))
+        ->assertHasResource('consumer',  ConsumerResource::make($consumer));
+
+ });
+
