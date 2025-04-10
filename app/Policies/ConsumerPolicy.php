@@ -45,9 +45,7 @@ class ConsumerPolicy
     public function delete(User $user, Consumer $consumer): bool
     {
         if ($user->id === $consumer->user_id) {
-            if ($consumer->amount === 0) {
-                return true;
-            }
+            return true;
         }
 
         return false;
