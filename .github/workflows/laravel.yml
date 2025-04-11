@@ -2,7 +2,7 @@ name: Laravel
 
 on:
   push:
-    branches: [ "main","dev" ]
+    branches: [ "main","dev", "MTM-40-user-control-for-admin" ]
   pull_request:
     branches: [ "main","dev" ]
 
