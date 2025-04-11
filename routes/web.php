@@ -5,6 +5,8 @@ use App\Http\Controllers\ConsumerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
+
 use App\Http\Resources\ConsumerResource;
 use App\Models\Consumer;
 use Illuminate\Foundation\Application;
@@ -25,6 +27,14 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+
+    Route::middleware(['can:create-user'])->group(function () {
+
+//        TODO: add another middle ware to convert the 403
+        Route::get('admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+        Route::post('admin/users', [UserController::class, 'store'])->name('admin.users.store');
+    });
+
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
