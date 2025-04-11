@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -30,7 +31,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        dd('User store called');
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'min:5', 'max:25'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:8'],
+        ]);
+
+        User::factory()->create([...$validated, 'password' => Hash::make($validated['password'])]);
+        return redirect(route('admin'))->with(['success' => 'User created successfully']);
     }
 
     /**
