@@ -16,6 +16,4 @@ it('requires authentication', function () {
     actingAs($user)
         ->get(route('people.create'))
         ->assertComponent('People/Create');
-
-
  });
