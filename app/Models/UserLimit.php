@@ -15,4 +15,8 @@ class UserLimit extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function usedAmount(): int {
+        return 123;
+    }
 }

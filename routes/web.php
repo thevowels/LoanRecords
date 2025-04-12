@@ -32,7 +32,11 @@ Route::middleware([
 
 //        TODO: add another middle ware to convert the 403
         Route::get('admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+        Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
         Route::post('admin/users', [UserController::class, 'store'])->name('admin.users.store');
+        Route::get('admin/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
+        Route::put('admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+        Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     });
 
 
@@ -51,6 +55,3 @@ Route::middleware([
 
 });
 
-Route::get('/test', function () {
-    return ConsumerResource::make(Consumer::with('user')->find(1));
-});

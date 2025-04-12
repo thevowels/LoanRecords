@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\UserLimit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,6 +16,15 @@ class UserController extends Controller
     public function index()
     {
         //
+        return inertia('User/Index', [
+            'users' => function () {
+                $users = UserResource::collection(User::with('limits')->paginate());
+
+                $users->collection->transform(fn ($user) => $user->adminRequest());
+                return $users;
+            }
+        ]);
+
     }
 
     /**
@@ -47,6 +58,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         //
+        return inertia('User/Show', [
+            'user' => UserResource::make($user)->adminRequest(),
+        ]);
     }
 
     /**
@@ -55,6 +69,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
+        return inertia('User/Edit', [
+            'user' => UserResource::make($user)->adminRequest(),
+        ]);
     }
 
     /**
@@ -63,6 +80,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
+
+        dd($user);
     }
 
     /**

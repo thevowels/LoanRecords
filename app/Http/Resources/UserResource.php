@@ -12,12 +12,23 @@ class UserResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+
+    private bool $adminRequest = false;
+
+    public function adminRequest(): self
+    {
+        $this->adminRequest = true;
+        return $this;
+    }
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
             'name' => $this->name,
             'profile_photo_path' => $this->profile_photo_path,
+            'email' => $this->when($this->adminRequest, fn () => $this->email),
+            'limits' => UserLimitResource::collection($this->whenLoaded('limits')),
+
         ];
     }
 }
