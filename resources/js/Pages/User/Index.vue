@@ -27,7 +27,7 @@
                     </CardHeader>
                     <CardContent>
                         <div v-if="user.limits[0]" v-for="limit in user.limits">
-                            Limit: {{limit.limit}} <span>{{limit.currency}}</span>
+                            Limit: {{limit.limit}}  Used: {{limit.usedAmount}}
                         </div>
                         <div v-else>
                         No limit Yet

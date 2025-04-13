@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TransactionApiController;
+use App\Http\Controllers\UserInfoApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,5 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/transactions', TransactionApiController::class)->name('transactions');
+    Route::get('/userinfo', UserInfoApiController::class )->name('users.info');
 });

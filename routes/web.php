@@ -36,6 +36,7 @@ Route::middleware([
         Route::post('admin/users', [UserController::class, 'store'])->name('admin.users.store');
         Route::get('admin/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
         Route::put('admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+        Route::put('admin/users/{user}/password', [UserController::class, 'password'])->name('admin.users.password');
         Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     });
 

@@ -26,6 +26,7 @@ class UserLimitResource extends JsonResource
           'limit' => $this->limit,
           'created_at' => $this->created_at,
           'updated_at' => $this->updated_at,
+            'usedAmount' => $this->usedAmount(),
         ];
     }
 }

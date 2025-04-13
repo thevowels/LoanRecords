@@ -6,13 +6,33 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\UserLimit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+
+    /**
+     * Update password of certain user.
+     */
+    public function password(Request $request, User $user): void
+    {
+        Gate::authorize('update', $user);
+
+        $validated = $request->validate([
+            'newPassword' => ['required', 'string', 'min:8', 'confirmed'],
+            'adminPassword' => ['required', 'string', 'current_password:web'],
+        ]);
+
+        $user->update(['password' => Hash::make($validated['newPassword'])]);
+    }
+
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         //
@@ -59,7 +79,7 @@ class UserController extends Controller
     {
         //
         return inertia('User/Show', [
-            'user' => UserResource::make($user)->adminRequest(),
+            'user' => UserResource::make($user->load('limits'))->adminRequest(),
         ]);
     }
 
@@ -70,7 +90,7 @@ class UserController extends Controller
     {
         //
         return inertia('User/Edit', [
-            'user' => UserResource::make($user)->adminRequest(),
+            'user' => UserResource::make($user->load('limits'))->adminRequest(),
         ]);
     }
 
@@ -79,9 +99,14 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'min:5', 'max:25'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+        ]);
 
-        dd($user);
+        Gate::authorize('update', $user);
+
+        $user->update([...$validated]);
     }
 
     /**

@@ -27,6 +27,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'profile_photo_path' => $this->profile_photo_path,
             'email' => $this->when($this->adminRequest, fn () => $this->email),
+            'is_admin' => $this->is_admin,
             'limits' => UserLimitResource::collection($this->whenLoaded('limits')),
 
         ];

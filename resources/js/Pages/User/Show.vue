@@ -1,7 +1,7 @@
 <template>
     <AppLayout title="">
         <Container>
-            <div class="max-w-xl mx-auto">
+            <div class="max-w-xl mx-auto space-y-4">
                 <Card class=" mx-auto">
                     <CardHeader>
                         <div class="flex flex-row justify-between gap-0 space-x-0 items-center">
@@ -32,6 +32,18 @@
                         </div>
                     </CardHeader>
                 </Card>
+                <div class="text-right">
+                    <PrimaryButton>
+                        Add Limit
+                    </PrimaryButton>
+                </div>
+                <Card v-for="limit in user.limits" class=" mx-auto">
+                    <CardHeader>
+                        <UserLimit :limit="limit"/>
+                    </CardHeader>
+                </Card>
+
+
             </div>
         </Container>
     </AppLayout>
@@ -51,6 +63,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {route} from "ziggy-js";
+import UserLimit from "@/Components/User/UserLimit.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const goTo = (id: string) => {
     window.location.href = route('admin.users.edit', id);
