@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
             $table->enum('currency', ['kyat', 'baht']);
-            $table->unsignedBigInteger('limit');
+            $table->unsignedBiteger('limit');
             $table->unique(['user_id', 'currency']);
             $table->timestamps();
         });

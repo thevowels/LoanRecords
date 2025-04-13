@@ -1,10 +1,6 @@
 <template>
-    <AppLayout title="users">
+    <AppLayout title="Users">
         <Container>
-            <h1>
-                Users Index page
-            </h1>
-
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <Card v-for="user in users.data" :key="user.id" @click="goTo(user.id)">
                     <CardHeader>

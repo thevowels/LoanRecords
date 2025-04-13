@@ -29,6 +29,24 @@ class UserController extends Controller
         $user->update(['password' => Hash::make($validated['newPassword'])]);
     }
 
+    public function addLimit(Request $request, User $user): void
+    {
+
+        $validated = $request->validate([
+            'currency' => [['required', Rule::in(['kyat', 'baht'])]],
+            'limit' => ['required', 'integer', 'min:1'],
+        ]);
+
+        // TODO: need to add test for unique(currency)
+
+        UserLimit::create([
+            ...$validated,
+            'user_id' => $user->id,
+        ]);
+
+    }
+
+
     /**
      * Display a listing of the resource.
      */

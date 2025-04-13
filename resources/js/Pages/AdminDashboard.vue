@@ -40,10 +40,7 @@ import DashboardCharts from "@/Components/Dashboard/DashboardCharts.vue";
 
 
 const kpiCards =  [
-    // { label: "Active Loan", value: props.summaries.active_loan, click_route: false},
-    // { label: "Monthly Loan", value: props.summaries.monthly_loan },
-    // { label: "Monthly Return", value: props.summaries.monthly_return },
-    { label: "User Count", value: props.summaries.total_users, click_route: false },
+    { label: "User Count", value: props.summaries.total_users, click_route: '/admin/users' },
     { label: "Consumer Count" , value: props.summaries.total_people, click_route:'/people'}
 ]
 </script>

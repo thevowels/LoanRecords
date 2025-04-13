@@ -30,17 +30,18 @@ const menu = [
         when : () =>usePage().props.auth.user,
     },
     {
-        name: 'Users',
-        url: route('admin.users.index'),
-        route: 'admin.users.index',
-        when : () =>usePage().props.auth?.user['is_admin'],
-    },
-    {
         name: 'Peoples',
         url: route('people.index'),
         route: 'people.index',
         when : () =>usePage().props.auth.user,
     },
+    {
+        name: 'Users',
+        url: route('admin.users.index'),
+        route: 'admin.users.index',
+        when : () =>usePage().props.auth?.user['is_admin'],
+    },
+
     {
         name: 'Create User',
         url: route('admin.users.create'),
