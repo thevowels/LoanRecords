@@ -33,7 +33,7 @@ class UserController extends Controller
     {
 
         $validated = $request->validate([
-            'currency' => [['required', Rule::in(['kyat', 'baht'])]],
+            'currency' => ['required', Rule::in(['kyat', 'baht'])],
             'limit' => ['required', 'integer', 'min:1'],
         ]);
 
@@ -46,6 +46,15 @@ class UserController extends Controller
 
     }
 
+    public function updateLimit(Request $request, User $user, UserLimit $limit): void
+    {
+        $validated = $request->validate([
+            'limit' => ['required', 'integer', 'min:100'],
+        ]);
+
+        $limit->update($validated);
+
+    }
 
     /**
      * Display a listing of the resource.

@@ -39,6 +39,7 @@ Route::middleware([
         Route::put('admin/users/{user}/password', [UserController::class, 'password'])->name('admin.users.password');
         Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
         Route::post('admin/users/{user}/addLimit', [UserController::class, 'addLimit'])->name('admin.users.addLimit');
+        Route::put ('admin/users/{user}/limit/{limit}/updateLimit', [UserController::class, 'updateLimit'])->name('admin.users.updateLimit');
     });
 
 

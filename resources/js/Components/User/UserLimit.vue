@@ -3,7 +3,18 @@
         <div class="flex flex-row justify-between">
             <div>
                 <h1 class="font-bold text-lg uppercase font-serif " :class=" edit ? 'text-red-500': 'text-primary'">{{limit.currency}}</h1>
-                <h1>User Limit: {{limit.limit}}</h1>
+                <h1 v-if="!edit">User Limit: {{limit.limit}}</h1>
+                <div v-if="edit">
+                    <form @submit.prevent="updateLimit">
+                        <div>
+                            <InputLabel for="limit" class="text-lg" value="User Limit:"></InputLabel>
+                            <TextInput  class="mr-8" v-model="form.limit"> </TextInput>
+                            <InputError :message="form.errors.limit" ></InputError>
+                            <PrimaryButton> Update</PrimaryButton>
+                        </div>
+                    </form>
+                </div>
+
                 <h1>Active Loans: {{limit.usedAmount}}</h1>
             </div>
             <div>
@@ -34,10 +45,28 @@
 import axios from "axios";
 import {computed, ref} from "vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import InputError from "@/Components/InputError.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import {useForm} from "@inertiajs/vue3";
+import {route} from "ziggy-js";
 
 const edit = ref(false);
 
 const props = defineProps(['limit']);
+const form =useForm({
+    'limit': props.limit.limit,
+})
+
+const updateLimit = () => {
+        form.put(route('admin.users.updateLimit', [props.limit.user_id, props.limit.id]),{
+            onSuccess: data => {
+                form.reset();
+                edit.value= false;
+            }
+        });
+}
 
 const percentage = computed(() => {
     return Math.floor((props.limit.usedAmount / props.limit.limit) * 100) + '%';
