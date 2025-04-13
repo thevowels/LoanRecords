@@ -15,14 +15,14 @@
         </div>
         <div class="flex justify-between mb-1">
             <span class="text-base font-medium text-blue-700 dark:text-white">Limit: {{limit.limit}}</span>
-            <span class="text-sm font-medium text-blue-700 dark:text-white">{{percentage}}%</span>
+            <span class="text-sm font-medium text-blue-700 dark:text-white">Used : {{percentage}}</span>
         </div>
-        <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
-            <div class="bg-blue-600 h-4 rounded-full" :style="{width: percentage}"></div>
+        <div class="w-full bg-blue-600 rounded-full h-4 dark:bg-gray-700">
+            <div class="bg-amber-600 h-4 rounded-full" :style="{width: percentage}"></div>
         </div>
         <div class="flex justify-between mb-1">
             <span class="text-base font-medium text-blue-700 dark:text-white"></span>
-            <span class="text-sm font-medium text-blue-700 dark:text-white">Used Amount: {{limit.usedAmount}}</span>
+            <span class="text-sm font-medium text-amber-600 dark:text-white">Used : {{limit.usedAmount}} {{limit.currency}}</span>
         </div>
     </div>
 

@@ -24,10 +24,10 @@
                         </div>
                         <div class="flex flex-row justify-between ">
                             <div class="mx-auto">
-                                ABCD
+
                             </div>
                             <div class="mx-auto">
-                                XYZK
+                                {{formatDistance(user.created_at, new Date(),{addSuffix: true})}}
                             </div>
                         </div>
                     </CardHeader>
@@ -59,7 +59,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-
+import { formatDistance} from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {route} from "ziggy-js";

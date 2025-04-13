@@ -21,29 +21,13 @@
                         </div>
                         <div class="flex flex-row justify-between ">
                             <div class="mx-auto">
-                                ABCD
                             </div>
                             <div class="mx-auto">
-                                XYZK
+                                {{formatDistance(user.created_at, new Date(),{addSuffix: true})}}
                             </div>
                         </div>
                     </CardHeader>
                 </Card>
-                <Card class=" mx-auto">
-                    <CardHeader>
-                        <div v-if="user.limits.length >0">
-                            <h1 v-for="limit in user.limits" :key="limit.id">
-                                {{limit.limit}}
-                            </h1>
-                        </div>
-                        <div v-if="user.limits.length < 2">
-                                <PrimaryButton>
-                                    Create Limit
-                                </PrimaryButton>
-                        </div>
-                    </CardHeader>
-                </Card>
-
                 <Card v-if="!user.is_admin"  class=" mx-auto">
                     <CardHeader>
                         <form @submit.prevent="submitNameEmail">
@@ -135,6 +119,28 @@
                         </form>
                     </CardHeader>
                 </Card>
+
+                <div v-if="user.limits.length >0">
+                    <div v-for="limit in user.limits" :key="limit.id" >
+                        <Card class=" mx-auto mt-4">
+                            <CardHeader>
+
+                                <UserLimitPie :userLimit="limit">
+                                    <template #header>
+                                        <h1 class="text-primary font-bold text-xl capitalize">{{ limit.currency  }} Limit</h1>
+                                    </template>
+                                </UserLimitPie>
+                            </CardHeader>
+                        </Card>
+
+                    </div>
+                </div>
+                <div v-if="user.limits.length < 2">
+                    <PrimaryButton>
+                        Create Limit
+                    </PrimaryButton>
+                </div>
+
             </div>
         </Container>
     </AppLayout>
@@ -161,6 +167,8 @@ import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import {ref} from "vue";
+import UserLimitPie from "@/Components/User/UserLimitPie.vue";
+import {formatDistance} from "date-fns";
 const props = defineProps(['user']);
 
 const nameEmail= useForm({

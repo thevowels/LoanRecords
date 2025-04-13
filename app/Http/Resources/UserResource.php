@@ -29,7 +29,7 @@ class UserResource extends JsonResource
             'email' => $this->when($this->adminRequest, fn () => $this->email),
             'is_admin' => $this->is_admin,
             'limits' => UserLimitResource::collection($this->whenLoaded('limits')),
-
+            'created_at' => $this->created_at,
         ];
     }
 }
