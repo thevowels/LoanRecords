@@ -5,6 +5,8 @@ use App\Http\Controllers\ConsumerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
+
 use App\Http\Resources\ConsumerResource;
 use App\Models\Consumer;
 use Illuminate\Foundation\Application;
@@ -26,6 +28,21 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
+    Route::middleware(['can:create-user'])->group(function () {
+
+//        TODO: add another middle ware to convert the 403
+        Route::get('admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+        Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
+        Route::post('admin/users', [UserController::class, 'store'])->name('admin.users.store');
+        Route::get('admin/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
+        Route::put('admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+        Route::put('admin/users/{user}/password', [UserController::class, 'password'])->name('admin.users.password');
+        Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+        Route::post('admin/users/{user}/addLimit', [UserController::class, 'addLimit'])->name('admin.users.addLimit');
+        Route::put ('admin/users/{user}/limit/{limit}/updateLimit', [UserController::class, 'updateLimit'])->name('admin.users.updateLimit');
+    });
+
+
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::get('/admin', AdminDashboardController::class)->name('admin');
@@ -41,6 +58,3 @@ Route::middleware([
 
 });
 
-Route::get('/test', function () {
-    return ConsumerResource::make(Consumer::with('user')->find(1));
-});

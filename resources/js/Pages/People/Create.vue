@@ -1,7 +1,6 @@
 <template>
     <AppLayout title="Create People">
         <Container>
-                Create People
             <form @submit.prevent="submitConsumer" class="space-y-4 p-8 border-indigo-700 border-2 rounded-lg mt-6  max-w-xl mx-auto">
                 <div>
                     <InputLabel for="name" >Name</InputLabel>

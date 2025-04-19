@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consumer;
 use App\Models\Debt;
 use App\Models\Transaction;
 use App\Models\UserLimit;
 use Illuminate\Http\Request;
+use Inertia\Response;
 
 class TransactionController extends Controller
 {
@@ -37,7 +39,10 @@ class TransactionController extends Controller
             'amount' => ['required', 'numeric', 'integer', 'min:1',
                 function ($attribute, $value, $fail) use ($request, $debt) {
                     if (! is_numeric($value)) {
-                        return;
+                        return $fail('The amount must be a number.');
+                    }
+                    if(Consumer::find($debt->consumer_id)->user_id !== $request->user()->id) {
+                        return $fail("You are not the person's owner");
                     }
                     if ($request->type === 'loan') {
 

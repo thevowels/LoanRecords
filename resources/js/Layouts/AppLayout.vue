@@ -35,6 +35,19 @@ const menu = [
         route: 'people.index',
         when : () =>usePage().props.auth.user,
     },
+    {
+        name: 'Users',
+        url: route('admin.users.index'),
+        route: 'admin.users.index',
+        when : () =>usePage().props.auth?.user['is_admin'],
+    },
+
+    {
+        name: 'Create User',
+        url: route('admin.users.create'),
+        route: 'admin.users.create',
+        when : () =>usePage().props.auth.user['is_admin'],
+    },
 ];
 const logout = () => {
     router.post(route('logout'));
@@ -44,9 +57,7 @@ const logout = () => {
 <template>
     <div>
         <Head :title="title" />
-
         <Banner />
-
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
