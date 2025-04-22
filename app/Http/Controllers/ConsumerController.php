@@ -63,6 +63,7 @@ class ConsumerController extends Controller
     {
         //
 
+//        dd($request);
         $validated = $request->validate([
             'name' => ['required', 'string', 'min:5', 'max:255'],
             'email' => ['nullable',  'string', 'email', 'max:255', 'unique:users'],
@@ -71,11 +72,15 @@ class ConsumerController extends Controller
             'identification_number' => ['required'],
             'country' => ['required'],
             'city' => ['required'],
-
+            'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:10240'],
         ]);
+        $photoPath = $request->file('photo')->store('id_photos', 'public');
+
+        unset($validated['photo']);
 
         $consumer = Consumer::create([
             ...$validated,
+            'id_url' => $photoPath,
             'user_id' => $request->user()->id,
         ]);
 

@@ -32,14 +32,11 @@
                     <InputError :message="form.errors.identification_number"></InputError>
 
                 </div>
-<!--                <div>-->
-<!--                    <InputLabel for="country" >Country</InputLabel>-->
-<!--                    <select id="country" v-model="form.country" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">-->
-<!--                        <option value="Thailand">Thailand</option>-->
-<!--                        <option value="Myanmar">Myanmar</option>-->
-<!--                    </select>-->
-<!--                    <InputError :message="form.errors.country"></InputError>-->
-<!--                </div>-->
+                <div>
+                    <InputLabel for="photo" >Country</InputLabel>
+                    <input type="file" @change="handleFile" accept=".jpg,.jpeg,.png"/>
+                    <InputError :message="form.errors.country"></InputError>
+                </div>
                 <div>
                     <InputLabel for="city" >City</InputLabel>
                     <select id="city" v-model="form.city" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
@@ -67,6 +64,10 @@ import TextInput from "@/Components/TextInput.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 
+
+function handleFile(e) {
+    form.photo = e.target.files[0];
+}
 const provinces = [
     "Krabi", "Bangkok", "Kanchanaburi", "Kalasin", "KamphaengPhet", "KhonKaen",
     "Chanthaburi", "Chachoengsao", "ChonBuri", "ChaiNat", "Chaiyaphum", "Chumphon",
@@ -91,10 +92,12 @@ const form = useForm({
     'identification_type': 'NRC',
     'identification_number': '',
     'country': 'Thailand',
+    'photo': null,
     'city': provinces[1] ,
 });
 
 const submitConsumer =  () => {
+    console.log(form);
     form.post(route('people.store'));
 }
 

@@ -25,9 +25,10 @@ return new class extends Migration
             $table->string('country');
             $table->string('city');
 
+
             $table->softDeletes();
 
-            //            $table->string('photo_path', 2048)->nullable();
+            $table->string('id_url', 2048)->nullable();
 
             $table->timestamps();
         });
