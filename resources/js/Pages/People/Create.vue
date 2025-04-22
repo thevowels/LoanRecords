@@ -7,6 +7,20 @@
                     <TextInput id="name" v-model="form.name" placeholder="Name" class="w-full"></TextInput>
                     <InputError :message="form.errors.name"></InputError>
                 </div>
+                <div v-if="!potraitPreview">
+                    <InputLabel for="potrait" >Potrait</InputLabel>
+                    <input type="file" @change="handlePotrait" accept=".jpg,.jpeg,.png"/>
+                    <InputError :message="form.errors.potrait"></InputError>
+                </div>
+                <div v-if="potraitPreview">
+                    <img :src="potraitPreview" alt="Preview" class="w-32 h-32 object-cover rounded"/>
+                    <SecondaryButton
+                        @click="removePotrait"
+                    >
+                        Remove
+                    </SecondaryButton>
+                </div>
+
                 <div>
                     <InputLabel for="email" >Email</InputLabel>
                     <TextInput id="email" v-model="form.email" placeholder="Email" class="w-full"></TextInput>
@@ -33,9 +47,9 @@
 
                 </div>
                 <div>
-                    <InputLabel for="photo" >Country</InputLabel>
+                    <InputLabel for="photo" >ID Photo</InputLabel>
                     <input type="file" @change="handleFile" accept=".jpg,.jpeg,.png"/>
-                    <InputError :message="form.errors.country"></InputError>
+                    <InputError :message="form.errors.photo"></InputError>
                 </div>
                 <div>
                     <InputLabel for="city" >City</InputLabel>
@@ -64,10 +78,44 @@ import TextInput from "@/Components/TextInput.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 
+import {ref} from "vue";
+
+const potraitPreview = ref(null);
+
+
+
+
 
 function handleFile(e) {
     form.photo = e.target.files[0];
 }
+
+function handlePotrait(e) {
+    const file = e.target.files[0];
+    updatePotrait(file);
+}
+
+function updatePotrait(file) {
+    if(file && file.type.startsWith("image/")){
+        form.potrait = file;
+
+        const reader = new FileReader();
+        reader.onload = e => {
+            potraitPreview.value = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }else {
+        form.potrait = null;
+        potraitPreview.value = null;
+    }
+}
+
+
+function removePotrait(e) {
+    form.potrait= null;
+    potraitPreview.value = null;
+}
+
 const provinces = [
     "Krabi", "Bangkok", "Kanchanaburi", "Kalasin", "KamphaengPhet", "KhonKaen",
     "Chanthaburi", "Chachoengsao", "ChonBuri", "ChaiNat", "Chaiyaphum", "Chumphon",
@@ -93,6 +141,7 @@ const form = useForm({
     'identification_number': '',
     'country': 'Thailand',
     'photo': null,
+    'potrait': null,
     'city': provinces[1] ,
 });
 
