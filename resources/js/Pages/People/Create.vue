@@ -7,15 +7,15 @@
                     <TextInput id="name" v-model="form.name" placeholder="Name" class="w-full"></TextInput>
                     <InputError :message="form.errors.name"></InputError>
                 </div>
-                <div v-if="!potraitPreview">
-                    <InputLabel for="potrait" >Potrait</InputLabel>
-                    <input type="file" @change="handlePotrait" accept=".jpg,.jpeg,.png"/>
-                    <InputError :message="form.errors.potrait"></InputError>
+                <div >
+                    <InputLabel for="portrait" >Portrait</InputLabel>
+                    <input v-if="!portraitPreview" type="file" @change="handlePortrait" accept=".jpg,.jpeg,.png"/>
+                    <InputError :message="form.errors.portrait"></InputError>
                 </div>
-                <div v-if="potraitPreview">
-                    <img :src="potraitPreview" alt="Preview" class="w-32 h-32 object-cover rounded"/>
+                <div v-if="portraitPreview" class="space-y-2">
+                    <img :src="portraitPreview" alt="Preview" class="w-32 h-32 object-cover rounded"/>
                     <SecondaryButton
-                        @click="removePotrait"
+                        @click="removePortrait"
                     >
                         Remove
                     </SecondaryButton>
@@ -46,11 +46,20 @@
                     <InputError :message="form.errors.identification_number"></InputError>
 
                 </div>
-                <div>
+                <div >
                     <InputLabel for="photo" >ID Photo</InputLabel>
-                    <input type="file" @change="handleFile" accept=".jpg,.jpeg,.png"/>
+                    <input v-if="!IdPreview" type="file" @change="handleId" accept=".jpg,.jpeg,.png"/>
                     <InputError :message="form.errors.photo"></InputError>
                 </div>
+                <div v-if="IdPreview" class="space-y-2">
+                    <img :src="IdPreview" alt="Preview" class="w-32 h-32 object-cover rounded"/>
+                    <SecondaryButton
+                        @click="removeIdFile"
+                    >
+                        Remove
+                    </SecondaryButton>
+                </div>
+
                 <div>
                     <InputLabel for="city" >City</InputLabel>
                     <select id="city" v-model="form.city" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
@@ -80,40 +89,63 @@ import InputError from "@/Components/InputError.vue";
 
 import {ref} from "vue";
 
-const potraitPreview = ref(null);
+const portraitPreview = ref(null);
+
+const IdPreview = ref(null);
 
 
 
 
-
-function handleFile(e) {
-    form.photo = e.target.files[0];
+function handleId(e) {
+    const file = e.target.files[0]
+    updateId(file)
 }
 
-function handlePotrait(e) {
+function handlePortrait(e) {
     const file = e.target.files[0];
-    updatePotrait(file);
+    updatePortrait(file);
 }
 
-function updatePotrait(file) {
+function updateId(file) {
     if(file && file.type.startsWith("image/")){
-        form.potrait = file;
+        form.photo = file;
+
+        const reader = new FileReader();
+
+        reader.onload = e => {
+            IdPreview.value = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }else{
+        form.photo = null;
+        IdPreview.value = null;
+    }
+}
+
+function updatePortrait(file) {
+    if(file && file.type.startsWith("image/")){
+        form.portrait = file;
 
         const reader = new FileReader();
         reader.onload = e => {
-            potraitPreview.value = e.target.result;
+            portraitPreview.value = e.target.result;
         }
         reader.readAsDataURL(file);
     }else {
-        form.potrait = null;
-        potraitPreview.value = null;
+        form.portrait = null;
+        portraitPreview.value = null;
     }
 }
 
 
-function removePotrait(e) {
-    form.potrait= null;
-    potraitPreview.value = null;
+function removePortrait(e) {
+    form.portrait= null;
+    portraitPreview.value = null;
+}
+
+function removeIdFile(e) {
+    form.photo =null;
+    IdPreview.value = null;
 }
 
 const provinces = [
@@ -141,7 +173,7 @@ const form = useForm({
     'identification_number': '',
     'country': 'Thailand',
     'photo': null,
-    'potrait': null,
+    'portrait': null,
     'city': provinces[1] ,
 });
 

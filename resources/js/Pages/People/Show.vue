@@ -8,8 +8,8 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 ">
-                    <div class="mx-auto">
-                        <img :src="consumer.id_url" class="w-16 sm:w-fit" />
+                    <div class="mt-4 flex items-center space-x-4 ">
+                        <img :src="consumer.portrait_url" class="w-72 object-cover rounded mx-auto" />
                     </div>
                     <div class="space-y-2 mx-auto">
                         <h1 class="text-left text-xl font-bold pl-4">{{ consumer.name }}</h1>

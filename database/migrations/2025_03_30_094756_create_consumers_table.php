@@ -29,6 +29,7 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->string('id_url', 2048)->nullable();
+            $table->string('portrait_url', 2048)->nullable();
 
             $table->timestamps();
         });

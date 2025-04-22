@@ -73,14 +73,17 @@ class ConsumerController extends Controller
             'country' => ['required'],
             'city' => ['required'],
             'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:10240'],
+            'portrait' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:10240'],
         ]);
-        $photoPath = $request->file('photo')->store('id_photos', 'public');
-
+        $idPath = $request->file('photo')->store('id_photos', 'public');
+        $portraitPath = $request->file('portrait')->store('consumers', 'public');
         unset($validated['photo']);
+        unset($validated['portrait']);
 
         $consumer = Consumer::create([
             ...$validated,
-            'id_url' => $photoPath,
+            'id_url' => $idPath,
+            'portrait_url' => $portraitPath,
             'user_id' => $request->user()->id,
         ]);
 
