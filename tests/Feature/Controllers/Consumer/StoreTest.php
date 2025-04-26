@@ -3,10 +3,14 @@
 use App\Models\Consumer;
 use App\Models\User;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\post;
 
 beforeEach(function () {
+    Storage::fake('public');
+
     $this->validData = [
         'name' => 'John Doe',
         'email' => 'john@doe.com',
@@ -24,10 +28,13 @@ it('requires authenticatoin', function () {
 });
 
 it('can store post', function () {
+    $this->withoutExceptionHandling();
+    $idphoto = UploadedFile::fake()->image('id_photo.jpg');
+    $portraitphoto = UploadedFile::fake()->image('portrait_photo.jpg');
 
     $user = User::factory()->create();
     actingAs($user)
-        ->post(route('people.store', $this->validData));
+        ->post(route('people.store'),array_merge($this->validData, ['photo' => $idphoto, 'portrait' => $portraitphoto]), ['Content-Type' => 'multipart/form-data']);
 
     $this->assertDatabaseHas(Consumer::class, [
         ...$this->validData,
