@@ -15,4 +15,13 @@ class UserLimit extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function usedAmount(): int {
+        $usedAmount = Debt::join('consumers', 'debts.consumer_id', '=', 'consumers.id')
+            ->where('consumers.user_id', $this->user_id)
+            ->where('debts.currency', $this->currency)
+            ->sum('debts.amount');
+
+        return $usedAmount;
+    }
 }
