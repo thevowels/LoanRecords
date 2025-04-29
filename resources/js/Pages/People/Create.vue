@@ -7,6 +7,20 @@
                     <TextInput id="name" v-model="form.name" placeholder="Name" class="w-full"></TextInput>
                     <InputError :message="form.errors.name"></InputError>
                 </div>
+                <div >
+                    <InputLabel for="portrait" >Portrait</InputLabel>
+                    <input v-if="!portraitPreview" type="file" @change="handlePortrait" accept=".jpg,.jpeg,.png"/>
+                    <InputError :message="form.errors.portrait"></InputError>
+                </div>
+                <div v-if="portraitPreview" class="space-y-2">
+                    <img :src="portraitPreview" alt="Preview" class="w-32 h-32 object-cover rounded"/>
+                    <SecondaryButton
+                        @click="removePortrait"
+                    >
+                        Remove
+                    </SecondaryButton>
+                </div>
+
                 <div>
                     <InputLabel for="email" >Email</InputLabel>
                     <TextInput id="email" v-model="form.email" placeholder="Email" class="w-full"></TextInput>
@@ -32,14 +46,20 @@
                     <InputError :message="form.errors.identification_number"></InputError>
 
                 </div>
-<!--                <div>-->
-<!--                    <InputLabel for="country" >Country</InputLabel>-->
-<!--                    <select id="country" v-model="form.country" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">-->
-<!--                        <option value="Thailand">Thailand</option>-->
-<!--                        <option value="Myanmar">Myanmar</option>-->
-<!--                    </select>-->
-<!--                    <InputError :message="form.errors.country"></InputError>-->
-<!--                </div>-->
+                <div >
+                    <InputLabel for="photo" >ID Photo</InputLabel>
+                    <input v-if="!IdPreview" type="file" @change="handleId" accept=".jpg,.jpeg,.png"/>
+                    <InputError :message="form.errors.photo"></InputError>
+                </div>
+                <div v-if="IdPreview" class="space-y-2">
+                    <img :src="IdPreview" alt="Preview" class="w-32 h-32 object-cover rounded"/>
+                    <SecondaryButton
+                        @click="removeIdFile"
+                    >
+                        Remove
+                    </SecondaryButton>
+                </div>
+
                 <div>
                     <InputLabel for="city" >City</InputLabel>
                     <select id="city" v-model="form.city" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
@@ -67,6 +87,67 @@ import TextInput from "@/Components/TextInput.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 
+import {ref} from "vue";
+
+const portraitPreview = ref(null);
+
+const IdPreview = ref(null);
+
+
+
+
+function handleId(e) {
+    const file = e.target.files[0]
+    updateId(file)
+}
+
+function handlePortrait(e) {
+    const file = e.target.files[0];
+    updatePortrait(file);
+}
+
+function updateId(file) {
+    if(file && file.type.startsWith("image/")){
+        form.photo = file;
+
+        const reader = new FileReader();
+
+        reader.onload = e => {
+            IdPreview.value = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }else{
+        form.photo = null;
+        IdPreview.value = null;
+    }
+}
+
+function updatePortrait(file) {
+    if(file && file.type.startsWith("image/")){
+        form.portrait = file;
+
+        const reader = new FileReader();
+        reader.onload = e => {
+            portraitPreview.value = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }else {
+        form.portrait = null;
+        portraitPreview.value = null;
+    }
+}
+
+
+function removePortrait(e) {
+    form.portrait= null;
+    portraitPreview.value = null;
+}
+
+function removeIdFile(e) {
+    form.photo =null;
+    IdPreview.value = null;
+}
+
 const provinces = [
     "Krabi", "Bangkok", "Kanchanaburi", "Kalasin", "KamphaengPhet", "KhonKaen",
     "Chanthaburi", "Chachoengsao", "ChonBuri", "ChaiNat", "Chaiyaphum", "Chumphon",
@@ -91,10 +172,13 @@ const form = useForm({
     'identification_type': 'NRC',
     'identification_number': '',
     'country': 'Thailand',
+    'photo': null,
+    'portrait': null,
     'city': provinces[1] ,
 });
 
 const submitConsumer =  () => {
+    console.log(form);
     form.post(route('people.store'));
 }
 
