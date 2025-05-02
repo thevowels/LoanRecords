@@ -29,13 +29,21 @@ class UserController extends Controller
         $user->update(['password' => Hash::make($validated['newPassword'])]);
     }
 
-    public function addLimit(Request $request, User $user): void
+    public function addLimit(Request $request, User $user)
     {
 
         $validated = $request->validate([
-            'currency' => ['required', Rule::in(['kyat', 'baht'])],
+            'currency' => ['required',
+                Rule::in(['kyat', 'baht']),
+            ],
             'limit' => ['required', 'integer', 'min:1'],
         ]);
+
+        $response = Gate::inspect('addLimit', [User::class,  $user, $validated['currency'] ]);
+
+        if (! $response->allowed()) {
+            return back()->withErrors($response->message());
+        }
 
         // TODO: need to add test for unique(currency)
 
