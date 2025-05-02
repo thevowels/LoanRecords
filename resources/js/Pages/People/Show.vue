@@ -12,9 +12,10 @@
                         <div  class="text-center space-y-3">
                             <img :src="consumer.portrait_url" class="w-72 h-72 object-cover rounded mx-auto border border-black p-2" :class="{'w-28 h-28' : switchPotrait}"  @click="() => switchPotrait = !switchPotrait"/>
                             <img :src="consumer.id_url" class="w-16 h-16 object-cover rounded mx-auto border-black border p-2" :class="{'w-72 h-72 ' : switchPotrait}" @click="() => switchPotrait = !switchPotrait"/>
-                            <PrimaryButton>
+                            <a class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150"
+                               :href="route('consumer.download', consumer)">
                                 Download Profile Information
-                            </PrimaryButton>
+                            </a>
                         </div>
                     </div>
                     <div class="space-y-2 mx-auto">
@@ -61,6 +62,10 @@ import DebtCard from "@/Components/Cards/DebtCard.vue";
 
 const switchPotrait = ref(false);
 
+
+const downloadConsumer = async () => {
+
+}
 const goBack = () => window.history.back();
 
 const switchShow = () => open.value=!open.value;
