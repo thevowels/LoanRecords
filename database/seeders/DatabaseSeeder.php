@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
                 while($start->lte($end)) {
                     foreach( Debt::where('currency','baht')->get() as $debt) {
                         $amount = rand(500,1000);
-                        Transaction::factory(2)->create([
+                        Transaction::factory(3)->create([
                             'debt_id' => $debt->id,
                             'user_id' => 1,
                             'type' => 'loan',
