@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Gate;
 
 
 use Barryvdh\DomPDF\Facade\Pdf;
+
+set_time_limit(120);
+
 class ConsumerController extends Controller
 {
     /**

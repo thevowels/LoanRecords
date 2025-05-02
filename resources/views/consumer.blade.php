@@ -72,7 +72,7 @@
                         @foreach ($debt['transactions'] as $index =>  $transaction)
                             <tr class=" odd:bg-gray-200 border border-gray-300 text-center">
                                 <td class="border border-gray-300 text-center">
-                                    {{$transaction['amount']}}
+                                    {{$transaction['amount']}} {{$transaction['currency'] === 'kyat' ? 'MMK' : 'THB'}}
                                 </td>
                                 <td class="border border-gray-300 text-center">
                                     {{$transaction['type']}}

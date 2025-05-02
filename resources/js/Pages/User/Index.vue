@@ -14,11 +14,11 @@
                             </div>
                                 <div class="ml-4">
                                     <h1 class="text-lg font-bold">{{user.name}}</h1>
-                                    <h1 class="text-sm text-gray-600">{{ user.email }}</h1>
+                                    <h1 class="text-sm text-gray-600 break-all">{{ user.email }}</h1>
                                 </div>
                         </div>
                         <CardDescription>
-                            asdf
+                                    <!--  TODO: Add something here-->
                         </CardDescription>
                     </CardHeader>
                     <CardContent>

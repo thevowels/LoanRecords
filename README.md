@@ -14,6 +14,9 @@ Loan Track is a loan management system built with Laravel Jetstream and Vue.js. 
     - Admins have full access to manage all entries.
 - **Secure Authentication:** Leveraging Laravel Jetstream for authentication and authorization.
 - **Modern UI:** A seamless and interactive interface powered by Vue.js.
+- **Data Visualization:** Visualize monthly loan and return transactions through interactive charts and graphs.
+- **Data Export:** Export transaction records and user data as downloadable documents (e.g., CSV, PDF) for reporting or backup.
+
 
 ## Tech Stack
 
@@ -50,7 +53,12 @@ Loan Track is a loan management system built with Laravel Jetstream and Vue.js. 
    ```sh
    php artisan migrate --seed
    ```
-5. Start the development server:
+5. Build assets for PDF export:
+   ```sh
+    npm run build
+    cp public/build/assets/app-*.css public/css/pdf.css
+   ```
+6. Start the development server:
    ```sh
    php artisan serve
    ```
