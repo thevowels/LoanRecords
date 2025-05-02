@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
+
+use Barryvdh\DomPDF\Facade\Pdf;
 class ConsumerController extends Controller
 {
     /**
@@ -47,6 +49,21 @@ class ConsumerController extends Controller
         ]);
     }
 
+
+    public function download(Request $request, Consumer $consumer) {
+
+        $debts = Debt::where('consumer_id', '=', $consumer->id)->latest('id')->with('transactions')->get();
+        $pdf = Pdf::loadView('consumer', ['consumer' => $consumer, 'debts' => $debts]);
+        return $pdf->download($consumer->name . '.pdf');
+    }
+
+    public function test(Request $request, ) {
+
+        $consumer = Consumer::with('debts')->find(3);
+        $debts = Debt::where('consumer_id', '=', $consumer->id)->latest('id')->with('transactions')->get();
+
+        return view('consumer', ['consumer' => $consumer, 'debts' => $debts]);
+    }
     /**
      * Show the form for creating a new resource.
      */

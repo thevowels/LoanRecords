@@ -55,6 +55,7 @@ Route::middleware([
 
     Route::resource('people.debts', DebtController::class)->shallow();
     Route::resource('debts.transactions', TransactionController::class)->shallow()->only(['store', 'show', 'update']);
-
+    Route::get('/test/{consumer}' , [ConsumerController::class, 'download'])->name('consumer.download');
+    Route::get('consumer', [ConsumerController::class, 'test'])->name('consumer.test');
 });
 
