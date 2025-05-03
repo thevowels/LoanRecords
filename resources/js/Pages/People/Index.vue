@@ -2,7 +2,7 @@
 
     <AppLayout title="People">
         <Container >
-            <div v-if="people.data.length === 0" class="flex pt-40 items-center justify-center text-center space-y-8 flex-col">
+            <div v-if="people.data.length === 0 && !props.query" class="flex pt-40 items-center justify-center text-center space-y-8 flex-col">
                 <div class="text-xl font-semibold ">
                     You don't have any people added yet.
 
@@ -15,7 +15,7 @@
                     <a :href="route('people.create')" class="inline-flex items-center px-4 py-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">Add New Person</a>
                 </div>
             </div>
-            <div v-if="people.data.length !== 0">
+            <div v-if="people.data.length !== 0 || props.query">
                 <div class="text-right mb-4 mr-2 flex  flex-col sm:flex-row justify-between text-center">
                     <div>
                         <div v-if="!filter">
@@ -66,6 +66,10 @@
                     <Pagination :meta="props.people.meta"></Pagination>
                 </div>
             </div>
+            <div v-if="people.data.length === 0 && props.query" class="flex pt-40 items-center justify-center text-center space-y-8 flex-col">
+                Your search result is empty
+            </div>
+
         </Container>
     </AppLayout>
 
