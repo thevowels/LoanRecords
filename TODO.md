@@ -6,19 +6,13 @@
 - [ ] Add data visualization dashboard for loan statistics
   - [ ] Daily loan distribution charts
     *Description: Visual representation of loan distribution across months to identify trends and patterns*
-  - [ ] Default rate visualization
-    *Description: Graphical display of default rates to help identify problem areas and take preventive measures*
   - [ ] Revenue forecasting
     *Description: Predictive analytics to estimate future revenue based on current loan portfolio and payment patterns*
 - [ ] Implement loan payment reminders and notifications
-  - [ ] Email notifications
-    *Description: Automated email alerts for upcoming payments, overdue loans, and important updates*
   - [ ] Browser notifications
     *Description: Real-time browser-based notifications for immediate user attention*
   - [x] In-app notifications
     *Description: System notifications within the application for important updates and alerts*
-  - [ ] Customizable reminder schedules
-    *Description: Allow users to set their preferred notification timing and frequency*
 - [ ] Add export functionality for loan records
   - [ ] PDF reports with customizable templates
     *Description: Generate professional PDF reports with configurable layouts and branding*
@@ -26,20 +20,11 @@
     *Description: Raw data export in CSV format for external analysis and reporting*
   - [ ] Scheduled automated reports
     *Description: Automatically generate and distribute reports at specified intervals*
-- [ ] Implement bulk actions for managing multiple loans
-  - [ ] Bulk status updates
-    *Description: Update status for multiple loans simultaneously to save time*
-  - [ ] Mass payment processing
-    *Description: Process multiple payments in a single operation*
-  - [ ] Group communication
-    *Description: Send messages or notifications to multiple borrowers simultaneously*
 - [ ] Add loan history timeline view
   - [ ] Interactive timeline visualization
     *Description: Visual representation of loan history with interactive features*
   - [ ] Payment history tracking
     *Description: Detailed record of all payments made on a loan*
-  - [ ] Status change history
-    *Description: Track and display all status changes throughout loan lifecycle*
 ### 2. Financial Features
 - [ ] Add interest calculation functionality
   - [ ] Simple interest calculation
@@ -268,7 +253,7 @@
 
 ### 4. DevOps & Deployment
 - [ ] Implement proper CI/CD pipeline
-  - [ ] Automated builds
+  - [x] Automated builds
     *Description: Automate build process*
   - [ ] Deployment automation
     *Description: Automate deployment process*
@@ -351,10 +336,6 @@
      *Description: Improves user understanding of loan data*
    - Export functionality
      *Description: Enables data sharing and analysis*
-   - Payment reminders
-     *Description: Helps prevent payment delays*
-   - Bulk actions
-     *Description: Improves operational efficiency*
    - Timeline view
      *Description: Enhances historical data visualization*
 
