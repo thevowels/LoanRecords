@@ -18,19 +18,18 @@
             <div v-if="people.data.length !== 0">
                 <div class="text-right mb-4 mr-2 flex  flex-col sm:flex-row justify-between text-center">
                     <div>
-                        <a :href="route('people.create')" class="inline-flex items-center px-4 py-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">Add New Person</a>
-                    </div>
-                    <div>
                         <div v-if="!filter">
                             <PrimaryButton @click=" () => filter=true" class="px-4 py-4">Filter</PrimaryButton>
                         </div>
                         <form @submit.prevent="search" class="m-3" v-if="filter">
-                            <div>
-                                <div class="space-x-2 flex mt-1 ">
+                            <div class="space-y-2">
+                                <div class="flex flex-wrap ">
                                     <select v-model="searchForm.sort"  @change="search">
                                         <option value="id">Latest</option>
                                         <option value="name">Name</option>
                                     </select>
+                                </div>
+                                <div class=" flex flex-wrap gap-2">
 
                                     <InputLabel for="query" class="sr-only">Search</InputLabel>
                                     <TextInput v-model="searchForm.query" id="query" class="w-full"/>
@@ -39,9 +38,11 @@
                                 </div>
                             </div>
                         </form>
-
-
                     </div>
+                    <div v-if="!filter">
+                        <a :href="route('people.create')" class="inline-flex items-center px-4 py-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">Add New Person</a>
+                    </div>
+
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-4 ">
                     <div v-for="consumer in people.data" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 min-w-full  ">
