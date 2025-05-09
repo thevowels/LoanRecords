@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div v-if="people.data.length !== 0 || props.query">
-                <div class="text-right mb-4 mr-2 flex  flex-col sm:flex-row justify-between text-center">
+                <div class="text-right mb-4 mr-2 flex  flex-col sm:flex-row justify-between">
                     <div>
                         <div v-if="!filter">
                             <PrimaryButton @click=" () => filter=true" class="px-4 py-4">Filter</PrimaryButton>
@@ -28,9 +28,25 @@
                                         <option value="id">Latest</option>
                                         <option value="name">Name</option>
                                     </select>
+                                    <label class="flex items-center cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            class="sr-only"
+                                            v-model="sortDesc"
+                                            @change="toggleSortOrder"
+                                        />
+                                        <div class="w-11 h-6 bg-gray-300 rounded-full shadow-inner relative transition-colors duration-200 ease-in-out">
+                                            <div
+                                                class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform"
+                                                :class="sortDesc ? 'translate-x-5' : ''"
+                                            ></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">
+            {{ sortDesc ? 'Newest First' : 'Oldest First' }}
+        </span>
+                                    </label>
                                 </div>
                                 <div class=" flex flex-wrap gap-2">
-
                                     <InputLabel for="query" class="sr-only">Search</InputLabel>
                                     <TextInput v-model="searchForm.query" id="query" class="w-full"/>
                                     <SecondaryButton type="submit">Search</SecondaryButton>
@@ -94,6 +110,7 @@ const props = defineProps(['people', 'query', 'sort', 'sortOrder']);
 
 const page = usePage();
 
+const sortDesc = ref(props.sortOrder == 'asc');
 const filter = ref(false);
 
 const searchForm = useForm({
@@ -104,6 +121,12 @@ const searchForm = useForm({
 });
 
 const search = () => searchForm.get(page.url);
+const toggleSortOrder = () => {
+    searchForm.sortOrder = sortDesc.value ? 'asc' : 'desc';
+}
 
+const clearSearch = () => {
+    searchForm.query = "";
+}
 
 </script>
