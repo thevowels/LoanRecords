@@ -6,6 +6,7 @@ use App\Http\Resources\ConsumerResource;
 use App\Models\Consumer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class AdminDashboardController extends Controller
@@ -24,38 +25,55 @@ class AdminDashboardController extends Controller
         //            ->orderBy('date')
         //            ->pluck('amount', 'date');
 
+        $dateRange  = collect();
+        $startDate  = Carbon::now()->subDays(15)->startOfDay();
+        $endDate    = Carbon::now()->startOfDay();
+
+        for ($date = $startDate; $date <= $endDate; $date->addDay()) {
+            $dateRange->put($date->toDateString(), 0);
+        }
+
+
+
+        $bahtLoans = DB::table('transactions')
+            ->where('currency', 'baht')
+            ->where('created_at', '>=', now()->subDays(15))
+            ->where('type', 'loan')
+            ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
+            ->groupBy('date')
+            ->pluck('total', 'date');
+        $bahtReturns = DB::table('transactions')
+            ->where('currency', 'baht')
+            ->where('created_at', '>=', now()->subDays(15))
+            ->where('type', 'return')
+            ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
+            ->groupBy('date')
+            ->pluck('total', 'date');
         $bahts = [
-            'loan' => DB::table('transactions')
-                ->where('currency', 'baht')
-                ->where('created_at', '>=', now()->subDays(15))
-                ->where('type', 'loan')
-                ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
-                ->groupBy('date')
-                ->pluck('total', 'date'),
-            'return' => DB::table('transactions')
-                ->where('currency', 'baht')
-                ->where('created_at', '>=', now()->subDays(15))
-                ->where('type', 'return')
-                ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
-                ->groupBy('date')
-                ->pluck('total', 'date'),
+            'loan' => $dateRange->merge($bahtLoans),
+            'return' => $dateRange->merge($bahtReturns),
 
         ];
+
+        $kyatLoans =  DB::table('transactions')
+            ->where('currency', 'kyat')
+            ->where('created_at', '>=', now()->subDays(15))
+            ->where('type', 'loan')
+            ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
+            ->groupBy('date')
+            ->pluck('total', 'date');
+
+        $kyatReturns = DB::table('transactions')
+            ->where('currency', 'kyat')
+            ->where('created_at', '>=', now()->subDays(15))
+            ->where('type', 'return')
+            ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
+            ->groupBy('date')
+            ->pluck('total', 'date');
         $kyats = [
-            'loan' => DB::table('transactions')
-                ->where('currency', 'kyat')
-                ->where('created_at', '>=', now()->subDays(15))
-                ->where('type', 'loan')
-                ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
-                ->groupBy('date')
-                ->pluck('total', 'date'),
-            'return' => DB::table('transactions')
-                ->where('currency', 'kyat')
-                ->where('created_at', '>=', now()->subDays(15))
-                ->where('type', 'return')
-                ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
-                ->groupBy('date')
-                ->pluck('total', 'date'),
+            'loan' => $dateRange->merge($kyatLoans),
+
+            'return' => $dateRange->merge($kyatReturns),
         ];
 
         //        $daily_return = DB::table('bahts')
