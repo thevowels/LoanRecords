@@ -7,6 +7,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import {route} from "ziggy-js";
 
 defineProps({
     canResetPassword: Boolean,
@@ -27,6 +28,22 @@ const submit = () => {
         onFinish: () => form.reset('password'),
     });
 };
+
+const testLogin = () => {
+    form.email = 'test@example.com';
+    form.password = 'password';
+    form.post(route('login'), {
+        onFinish: () => form.reset('password'),
+    })
+}
+const adminLogin = () => {
+    form.email = 'admin@example.com';
+    form.password = 'password';
+    form.post(route('login'), {
+        onFinish: () => form.reset('password'),
+    })
+
+}
 </script>
 
 <template>
@@ -86,5 +103,14 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+        <div class="flex flex-row justify-between mt-8">
+            <div>
+                <PrimaryButton @click="testLogin">Test User Login</PrimaryButton>
+            </div>
+            <div>
+                <PrimaryButton @click="adminLogin">Admin User Login</PrimaryButton>
+            </div>
+
+        </div>
     </AuthenticationCard>
 </template>

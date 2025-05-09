@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Gate;
 
 
 use Barryvdh\DomPDF\Facade\Pdf;
+
+set_time_limit(120);
+
 class ConsumerController extends Controller
 {
     /**
@@ -19,10 +22,8 @@ class ConsumerController extends Controller
      */
     public function index(Request $request)
     {
-
         $sortValue = $request->query('sort') ? $request->query('sort') : 'id';
         $sortOrder = $request->query('sortOrder') ? $request->query('sortOrder') : 'asc';
-
         if ($request->user()->is_admin) {
             $people = Consumer::with('user')
                 ->when($request->query('query'),
@@ -35,17 +36,13 @@ class ConsumerController extends Controller
                     fn (Builder $builder) => $builder->where('name', 'like', '%'.$request->query('query').'%')
                 );
         }
-        if ($sortValue === 'id') {
-            $people = $people->latest()->latest('id');
-        } else {
-            $people = $people->orderBy($sortValue, $sortOrder);
-        }
+        $people = $people->orderBy($sortValue, $sortOrder);
 
         return inertia('People/Index', [
             'people' => ConsumerResource::collection($people->paginate()->withQueryString()),
             'query' => $request->query('query'),
             'sort' => $request->query('sort'),
-            'sortOrder' => $request->query('sortOrder'),
+            'sortOrder' => $sortOrder,
         ]);
     }
 

@@ -41,6 +41,9 @@
                     <CardHeader>
                         <form @submit.prevent="addLimit" class="mx-auto" >
                             <div>
+                                <InputError v-for="error in errors" :message="error" class="text-3xl font-bold"/>
+                            </div>
+                            <div>
                                 <InputLabel for="currency">currency</InputLabel>
                                 <select id="currency" v-model="limitForm.currency" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm min-w-44">
                                     <option v-for="currency in Currencies" :key="currency" :value="currency">{{currency}}</option>
@@ -94,7 +97,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 const add = ref(false);
-const props = defineProps(["user"])
+const props = defineProps(["user", "errors"])
 let Currencies = ['kyat', 'baht'];
 
 

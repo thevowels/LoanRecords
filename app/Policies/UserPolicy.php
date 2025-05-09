@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Models\UserLimit;
 use Illuminate\Auth\Access\Response;
 
 class UserPolicy
@@ -17,7 +18,24 @@ class UserPolicy
         return false;
     }
 
+    public function addLimit(User $user, User $U_user , string $currency): Response
+    {
+        if (! $user->is_admin){
+            return Response::deny('You are not authorized to create debt for this customer.', 41);
+        }
+        if(UserLimit::where('user_id', $U_user->id)
+            ->where('currency', $currency)
+            ->exists())
+        {
+            return Response::deny('This currency already exists.', 42);
+        }
+        return Response::allow();
+    }
+
+
+
     /**
+     *
      * Determine whether the user can update the model.
      */
     public function update(User $user, User $model): bool

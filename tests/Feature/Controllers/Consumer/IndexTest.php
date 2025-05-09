@@ -29,5 +29,5 @@ it('requires authentication', function () {
 
     actingAs($user)
         ->get(route('people.index'))
-        ->assertHasPaginatedResource('people', ConsumerResource::collection($people->reverse()));
+        ->assertHasPaginatedResource('people', ConsumerResource::collection($people));
  });
