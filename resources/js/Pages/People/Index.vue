@@ -60,21 +60,30 @@
                     </div>
 
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-4 ">
-                    <div v-for="consumer in people.data" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 min-w-full  ">
-
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-4">
+                    <div
+                        v-for="consumer in people.data"
+                        class="flex flex-col justify-between max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 min-w-full"
+                    >
                         <div class="flex flex-row">
-                            <div class="flex w-48 p-2">
-                                <img :src="consumer.portrait_url" class="rounded rounded-lg"/>
+                            <div class="flex w-48 p-2 mx-auto">
+                                <img :src="consumer.portrait_url" class="rounded rounded-lg" />
                             </div>
                             <div>
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center ">{{consumer.name}}</h5>
-                                <p class="font-normal text-gray-700 dark:text-gray-400">{{consumer.city}}</p>
-
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white w-32">
+                                    {{ consumer.name }}
+                                </h5>
+                                <p class="font-normal text-gray-700 dark:text-gray-400">{{ consumer.city }}</p>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <a :href="route('people.show', consumer)" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150">Details</a>
+
+                        <div class="text-right mt-4">
+                            <a
+                                :href="route('people.show', consumer)"
+                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150"
+                            >
+                                Details
+                            </a>
                         </div>
                     </div>
                 </div>

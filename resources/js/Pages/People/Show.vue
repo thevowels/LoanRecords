@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 ">
-                    <div class="mt-4 flex items-center space-x-4 ">
+                    <div class=" flex items-center space-x-4 mx-auto ">
                         <div  class="text-center space-y-3">
                             <img :src="consumer.portrait_url" class="w-72 h-72 object-cover rounded mx-auto border border-black p-2" :class="{'w-28 h-28' : switchPotrait}"  @click="() => switchPotrait = !switchPotrait"/>
                             <img :src="consumer.id_url" class="w-16 h-16 object-cover rounded mx-auto border-black border p-2" :class="{'w-72 h-72 ' : switchPotrait}" @click="() => switchPotrait = !switchPotrait"/>
@@ -18,7 +18,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="space-y-2 mx-auto">
+                    <div class="space-y-2 mx-auto mt-8 sm:mt-0">
                         <h1 class="text-left text-xl font-bold pl-4">{{ consumer.name }}</h1>
                         <p v-if="consumer.phone"><span class="font-bold">Phone:</span> {{consumer.phone}}</p>
                         <p v-if="consumer.email">{{consumer.email}}</p>
